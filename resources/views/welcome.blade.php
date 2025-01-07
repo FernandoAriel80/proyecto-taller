@@ -26,26 +26,19 @@
             <div>
                 @if (Route::has('login'))
                     <nav class="flex items-center space-x-4">
-                        @auth
-                            <!-- Enlace a Dashboard solo si el usuario está autenticado -->
-                            <a href="{{ url('/dashboard') }}" class="text-gray-400 hover:text-gray-200 transition">
-                                Dashboard
-                            </a>
-                        @else
-                            <!-- Enlace a login si el usuario no está autenticado -->
-                            <a href="{{ route('login') }}"
-                                class="px-4 py-2 rounded-md bg-red-500 text-gray-100 hover:bg-red-600 transition">
-                                Ingresa
-                            </a>
+                        <!-- Enlace a login si el usuario no está autenticado -->
+                        <a href="{{ route('login') }}"
+                            class="px-4 py-2 rounded-md bg-red-500 text-gray-100 hover:bg-red-600 transition">
+                            Ingresa
+                        </a>
 
-                            <!-- Enlace a register si el usuario no está autenticado -->
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="px-4 py-2 rounded-md bg-red-500 text-gray-100 hover:bg-red-600 transition">
-                                    Registrate
-                                </a>
-                            @endif
-                        @endauth
+                        <!-- Enlace a register si el usuario no está autenticado -->
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class="px-4 py-2 rounded-md bg-red-500 text-gray-100 hover:bg-red-600 transition">
+                                Registrate
+                            </a>
+                        @endif
                     </nav>
                 @endif
 
@@ -124,28 +117,23 @@
             </div>
         </section>
 
-       {{--  <section id="servicios" class="py-16 bg-gray-100">
+        <section id="servicios" class="py-16 bg-gray-100">
             <div class="container mx-auto">
                 <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">
-                    Nuestros Servicios
+                    Otros Servicios
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Este contenedor será repetido por cada servicio -->
                     @foreach ($services as $service)
-                    <div class="service-card bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">{{ $service->name }}</h3>
-                        <p class="text-gray-700 mb-4">{{ $service->description }}</p>
-                        <p class="text-gray-900 font-bold">Precio: ${{ $service->price }}</p>
-                        <a href="{{ route('service.details', $service->id) }}"
-                            class="block mt-4 px-4 py-2 bg-blue-600 text-white text-center rounded-md hover:bg-blue-700 transition">
-                            Ver más detalles
-                        </a>
-                    </div>
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-blue-600">{{ $service->name }}</h3>
+                            <p class="text-gray-700 mb-4">{{ $service->description }}</p>
+                        </div>
                     @endforeach
                 </div>
             </div>
-        </section> --}}
-        
+        </section>
+
 
         <!-- Banner Solicitar Servicio -->
         <section class="relative bg-gradient-to-r from-black to-gray-800 text-white py-20">
@@ -158,7 +146,7 @@
                     servicio de mantenimiento, reparación o personalización y disfruta de un vehículo en perfectas
                     condiciones.
                 </p>
-                <a href="/solicitar-servicio"
+                <a href="{{ route('reserve.create') }}"
                     class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-md text-xl transition">
                     Solicitar Servicio
                 </a>
