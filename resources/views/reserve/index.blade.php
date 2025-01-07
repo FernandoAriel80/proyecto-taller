@@ -23,89 +23,216 @@
         <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg shadow-lg w-7/12 p-6">
             <!-- Botones de navegación -->
             <div class="flex justify-around mb-6">
-                <button id="btnDatosVehiculo" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos del
-                    Vehículo</button>
-                <button id="btnDatosReserva" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos de
-                    Reserva</button>
+                @if ($vehicles->isEmpty())
+                    <button id="btnDatosVehiculo" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos del
+                        Vehículo</button>
+                    <button id="btnDatosReserva"
+                        class="tab-button bg-gray-700 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                        Datos de Reserva
+                    </button>
+                @else
+                    <button id="btnDatosVehiculo" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos del
+                        Vehículo</button>
+                    <button id="btnDatosReserva" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos de
+                        Reserva</button>
+                @endif
             </div>
 
             <!-- Contenido dinámico -->
             <div id="datosVehiculo" class="tab-content">
                 <h2 class="text-xl text-white mb-4">Datos del Vehículo</h2>
-                <form action="{{ route('vehicle.store') }}" method="POST">
-                    @csrf
+                <div>
+                    @if ($vehicles->isEmpty())
+                        <form action="{{ route('reserve.store') }}" method="POST">
+                            @csrf
 
-                    <div class="grid grid-cols-2 gap-6">
-                        <!-- Primera columna -->
-                        <div>
-                            <div class="mb-4">
-                                <label for="patente" class="block text-gray-200 mb-2">Patente</label>
-                                <input type="text" id="patente" name="patente"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-                            </div>
-                            <div class="mb-4">
-                                <label for="brand" class="block text-gray-200 mb-2">Marca</label>
-                                <select id="brand" name="brand"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-                                    <option value="">Seleccione una marca</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->any())
-                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
-                                        {{--   {{ $errors->brand }} --}}
+                            <div class="grid grid-cols-2 gap-6">
+                                <!-- Primera columna -->
+                                <div>
+                                    <div class="mb-4">
+                                        <label for="license_plate" class="block text-gray-200 mb-2">Patente</label>
+                                        <input type="text" id="license_plate" name="license_plate"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('license_plate')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @endif
-                            </div>
-                            <div class="mb-4">
-                                <label for="model" class="block text-gray-200 mb-2">Modelo</label>
-                                <input type="text" id="model" name="model"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-                                @if ($errors->any())
-                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
-                                        {{ $errors->model }}
+                                    <div class="mb-4">
+                                        <label for="brand" class="block text-gray-200 mb-2">Marca</label>
+                                        <select id="brand" name="brand"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                            <option value="">Seleccione una marca</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand')
+                                            <div class="text-red-500 p-2 rounded">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @endif
-                            </div>
-                        </div>
+                                    <div class="mb-4">
+                                        <label for="model" class="block text-gray-200 mb-2">Modelo</label>
+                                        <input type="text" id="model" name="model"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('model')
+                                            <div class="text-red-500 p-2 rounded">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
 
-                        <!-- Segunda columna -->
-                        <div>
-                            <div class="mb-4">
-                                <label for="year" class="block text-gray-200 mb-2">Año del Vehículo (xxxx)</label>
-                                <input type="number" id="year" name="year"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-                                @if ($errors->any())
-                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
-                                        {{ $errors->year }}
+                                <!-- Segunda columna -->
+                                <div>
+                                    <div class="mb-4">
+                                        <label for="year" class="block text-gray-200 mb-2">Año del Vehículo
+                                            (xxxx)</label>
+                                        <input type="number" id="year" name="year"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('year')
+                                            <div class="text-red-500 p-2 rounded">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @endif
-                            </div>
-                            <div class="mb-4">
-                                <label for="vehicle_type" class="block text-gray-200 mb-2">Tipo de Vehículo</label>
-                                <select id="vehicle_type" name="vehicle_type"
-                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-                                    <option value="">Seleccione un tipo</option>
-                                    @foreach ($vehicleTypes as $vehicleType)
-                                        <option value="{{ $vehicleType->id }}">{{ $vehicleType->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->any())
-                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
-                                        {{-- {{ $errors->vehicleTypes }} --}}
+                                    <div class="mb-4">
+                                        <label for="vehicle_type" class="block text-gray-200 mb-2">Tipo de
+                                            Vehículo</label>
+                                        <select id="vehicle_type" name="vehicle_type"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                            <option value="">Seleccione un tipo</option>
+                                            @foreach ($vehicle_types as $vehicle_type)
+                                                <option value="{{ $vehicle_type->id }}">{{ $vehicle_type->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('vehicle_type')
+                                            <div class=" text-red-500 p-2 rounded">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @endif
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- Botón de acción -->
-                    <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
-                            y Seguir</button>
-                    </div>
-                </form>
+                            <!-- Botón de acción -->
+                            <div class="flex justify-end mt-6">
+                                <button type="submit"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
+                                    y Seguir</button>
+                            </div>
+                        </form>
+                    @else
+                        <form action="{{ route('reserve.store') }}" method="POST">
+                            @csrf
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <!-- Primera columna -->
+                                <div>
+                                    <div class="mb-4">
+                                        <label for="license_plate" class="block text-gray-200 mb-2">Patente</label>
+                                        <input type="text" id="license_plate" name="license_plate"
+                                            value="{{ $vehicle->license_plate }}"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('license_plate')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="brand" class="block text-gray-200 mb-2">Marca</label>
+                                        <select id="brand" name="brand"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                            <option value="">Seleccione una marca</option>
+                                            @foreach ($brands as $brand)
+                                                <option value="{{ $brand->id }}" @selected($brand->id == $vehicle->brand_id)>
+                                                    {{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="model" class="block text-gray-200 mb-2">Modelo</label>
+                                        <input type="text" id="model" name="model"
+                                            value="{{ $vehicle->model }}"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('model')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Segunda columna -->
+                                <div>
+                                    <div class="mb-4">
+                                        <label for="year" class="block text-gray-200 mb-2">Año del Vehículo
+                                            (xxxx)</label>
+                                        <input type="number" id="year" name="year"
+                                            value="{{ $vehicle->year }}"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                        @error('year')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="vehicle_type" class="block text-gray-200 mb-2">Tipo de
+                                            Vehículo</label>
+                                        <select id="vehicle_type" name="vehicle_type"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                            <option value="">Seleccione un tipo</option>
+                                            @foreach ($vehicle_types as $vehicle_type)
+                                                <option value="{{ $vehicle_type->id }}" @selected($vehicle_type->id == $vehicle->vehicle_type_id)>
+                                                    {{ $vehicle_type->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('year')
+                                            <div class="text-red-500 p-2 rounded ">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="vehicles" class="block text-gray-200 mb-2">Tus vehiculos</label>
+                                        <select id="vehicles" name="vehicles"
+                                            class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                            {{-- <option value="">Seleccione un tipo</option> --}}
+                                            @foreach ($vehicles as $vehicleAll)
+                                                <option value="{{ $vehicleAll->id }}" @selected($vehicleAll->id == $vehicle->id)>
+                                                    Patente: {{ $vehicleAll->license_plate }} -- Marca:
+                                                    {{ $vehicleAll->brand->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botón de acción -->
+                            <div class="flex justify-end mt-6">
+                                <button type="submit"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
+                                    y Seguir</button>
+                            </div>
+                        </form>
+                    @endif
+
+                </div>
+
             </div>
 
             <div id="datosReserva" class="tab-content hidden">
@@ -117,7 +244,8 @@
 
                     <!-- Botón de acción -->
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
+                        <button type="submit"
+                            class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
                             y Seguir</button>
                     </div>
                 </form>

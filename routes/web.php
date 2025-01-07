@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'create'])->name('reserve.create');
-    Route::post('/guardar-vehiculo', [ReservationController::class, 'store'])->name('vehicle.store');
+    Route::post('/reserve-vehiculo', [ReservationController::class, 'store'])->name('reserve.store');
 });
 
 require __DIR__.'/auth.php';
