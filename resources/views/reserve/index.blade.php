@@ -12,12 +12,21 @@
 </head>
 
 <body>
+
+    @if (session('success'))
+        <div class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
         <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg shadow-lg w-7/12 p-6">
             <!-- Botones de navegación -->
             <div class="flex justify-around mb-6">
-                <button id="btnDatosVehiculo" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos del Vehículo</button>
-                <button id="btnDatosReserva" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos de Reserva</button>
+                <button id="btnDatosVehiculo" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos del
+                    Vehículo</button>
+                <button id="btnDatosReserva" class="tab-button bg-gray-700 text-white px-4 py-2 rounded">Datos de
+                    Reserva</button>
             </div>
 
             <!-- Contenido dinámico -->
@@ -25,50 +34,76 @@
                 <h2 class="text-xl text-white mb-4">Datos del Vehículo</h2>
                 <form action="{{ route('vehicle.store') }}" method="POST">
                     @csrf
-                
+
                     <div class="grid grid-cols-2 gap-6">
                         <!-- Primera columna -->
                         <div>
                             <div class="mb-4">
                                 <label for="patente" class="block text-gray-200 mb-2">Patente</label>
-                                <input type="text" id="patente" name="patente" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                <input type="text" id="patente" name="patente"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
                             </div>
                             <div class="mb-4">
-                                <label for="marca" class="block text-gray-200 mb-2">Marca</label>
-                                <select id="marca" name="marca" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                <label for="brand" class="block text-gray-200 mb-2">Marca</label>
+                                <select id="brand" name="brand"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
                                     <option value="">Seleccione una marca</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->any())
+                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
+                                        {{--   {{ $errors->brand }} --}}
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-4">
-                                <label for="modelo" class="block text-gray-200 mb-2">Modelo</label>
-                                <input type="text" id="modelo" name="modelo" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                <label for="model" class="block text-gray-200 mb-2">Modelo</label>
+                                <input type="text" id="model" name="model"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                @if ($errors->any())
+                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
+                                        {{ $errors->model }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
                         <!-- Segunda columna -->
                         <div>
                             <div class="mb-4">
-                                <label for="anio" class="block text-gray-200 mb-2">Año del Vehículo (xxxx)</label>
-                                <input type="number" id="anio" name="anio" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                <label for="year" class="block text-gray-200 mb-2">Año del Vehículo (xxxx)</label>
+                                <input type="number" id="year" name="year"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                @if ($errors->any())
+                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
+                                        {{ $errors->year }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-4">
-                                <label for="tipo_vehiculo" class="block text-gray-200 mb-2">Tipo de Vehículo</label>
-                                <select id="tipo_vehiculo" name="tipo_vehiculo" class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+                                <label for="vehicle_type" class="block text-gray-200 mb-2">Tipo de Vehículo</label>
+                                <select id="vehicle_type" name="vehicle_type"
+                                    class="w-full px-4 py-2 rounded bg-gray-700 text-white">
                                     <option value="">Seleccione un tipo</option>
                                     @foreach ($vehicleTypes as $vehicleType)
                                         <option value="{{ $vehicleType->id }}">{{ $vehicleType->name }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->any())
+                                    <div class="bg-red-500 text-white p-4 rounded mb-4">
+                                        {{-- {{ $errors->vehicleTypes }} --}}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
 
                     <!-- Botón de acción -->
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar y Seguir</button>
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
+                            y Seguir</button>
                     </div>
                 </form>
             </div>
@@ -76,26 +111,37 @@
             <div id="datosReserva" class="tab-content hidden">
                 <h2 class="text-xl text-white mb-4">Datos de Reserva </h2>
                 <p class="text-gray-300">Formulario de datos del vehículo (en construcción).</p>
+
+                <form action="{{ route('dashboard') }}" method="POST">
+                    @csrf
+
+                    <!-- Botón de acción -->
+                    <div class="flex justify-end mt-6">
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">Guardar
+                            y Seguir</button>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
+        const btnDatosVehiculo = document.getElementById('btnDatosVehiculo');
+        const btnDatosReserva = document.getElementById('btnDatosReserva');
+        const datosVehiculo = document.getElementById('datosVehiculo');
+        const datosReserva = document.getElementById('datosReserva');
 
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabContents.forEach(content => content.classList.add('hidden'));
-                    tabButtons.forEach(btn => btn.classList.remove('bg-gray-800'));
+        btnDatosVehiculo.addEventListener('click', () => {
+            datosVehiculo.classList.remove('hidden');
+            datosReserva.classList.add('hidden');
 
-                    const target = button.id.replace('btn', '').toLowerCase();
-                    document.getElementById(target).classList.remove('hidden');
-                    button.classList.add('bg-gray-800');
-                });
-            });
         });
+
+        btnDatosReserva.addEventListener('click', () => {
+            datosReserva.classList.remove('hidden');
+            datosVehiculo.classList.add('hidden');
+        })
     </script>
 </body>
 

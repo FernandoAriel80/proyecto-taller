@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->string('patente')->unique();
-            $table->string('marca');
-            $table->string('modelo');
-            $table->integer('anio');
-            $table->string('tipo_vehiculo');
+            $table->string('license_plate')->unique();
+            $table->string('brand');
+            $table->string('model');
+            $table->integer('year');
+            $table->unsignedBigInteger('vehicle_type_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('vehicle_type_id')->references('id')->on('vehicle_types');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
