@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -22,25 +23,29 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create( Request $request)
+    public function showVehicleData( Request $request)
     {
-        $currenlyID = 1;
+        // vehicle
         $brands = Brand::all();
         $vehicle_types = VehicleType::all();
         $vehicles = Vehicle::with('brand')->where("user_id",$request->user()->id)->get();
         $vehicle = Vehicle::where("user_id",$request->user()->id)->orderByDesc("id")->first();
-
+        
         if ($request->has('vehicle_id')) {
             $vehicle = Vehicle::where("user_id",$request->user()->id)->find($request->vehicle_id);
         }
+        // reserva
+        $today = now()->toDateString();
+
+        $futureDate = now()->addDays(30)->toDateString();
         
-        return view('reserve.index', compact(['brands','vehicle_types','vehicle','vehicles']));
+        return view('reserve.index', compact(['brands','vehicle_types','vehicle','vehicles','today','futureDate']));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function saveVehicleData(Request $request)
     {
         // Validar los datos
         $validatedData = $request->all();
@@ -51,10 +56,6 @@ class ReservationController extends Controller
             'brand' => 'required|string',
             'vehicle_type' => 'required|integer|max:50',
         ],
-        /* [
-            'license_plate.required' => 'El campo "Patente" es obligatorio.',
-            'license_plate.max' => 'La "Patente" no puede tener más de 10 caracteres.',
-        ] */
        [
             'license_plate.required' => 'La patente es obligatoria.',
             'license_plate.unique' => 'La patente ya está registrada.',
@@ -84,35 +85,21 @@ class ReservationController extends Controller
         return redirect()->back()->with('success', 'El vehículo ha sido registrado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function saveReserveData(Request $request){
+         // Validación de la fecha (que no sea sábado ni domingo)
+         $request->validate([
+            'date' => ['required', 'date', function ($attribute, $value, $fail) {
+                // Obtener el día de la semana
+                $dayOfWeek = Carbon::parse($value)->dayOfWeek;
+
+                // Verificar si es sábado (6) o domingo (0)
+                if ($dayOfWeek === 0 || $dayOfWeek === 6) {
+                    $fail('La fecha seleccionada no puede ser un fin de semana.');
+                }
+            }],
+            // Otras validaciones para otros campos
+        ]);
+        return redirect()->back()->with('success', 'Reserva guardada con éxito');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
