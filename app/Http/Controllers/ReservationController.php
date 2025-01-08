@@ -24,10 +24,16 @@ class ReservationController extends Controller
      */
     public function create( Request $request)
     {
+        $currenlyID = 1;
         $brands = Brand::all();
         $vehicle_types = VehicleType::all();
-        $vehicle = Vehicle::where("user_id",$request->user()->id)->first();
         $vehicles = Vehicle::with('brand')->where("user_id",$request->user()->id)->get();
+        $vehicle = Vehicle::where("user_id",$request->user()->id)->orderByDesc("id")->first();
+
+        if ($request->has('vehicle_id')) {
+            $vehicle = Vehicle::where("user_id",$request->user()->id)->find($request->vehicle_id);
+        }
+        
         return view('reserve.index', compact(['brands','vehicle_types','vehicle','vehicles']));
     }
 

@@ -13,9 +13,16 @@
                 En nuestro taller especializado, ofrecemos mantenimiento, reparaciones y personalización para tu
                 vehículo.
             </p>
-            <a href="#servicios" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xl transition">
-                Ver nuestros servicios
-            </a>
+            <div class="flex justify-between">
+                <a href="#services"
+                    class="px-6 py-3 mx-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xl transition">
+                    Ver nuestros servicios
+                </a>
+                <a href="#reserve"
+                    class="px-6 py-3 mx-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xl transition">
+                    Hacer una reserva
+                </a>
+            </div>
         </div>
     </section>
 
@@ -39,37 +46,7 @@
         </div>
     </section>
 
-    <!-- Sección de Servicios -->
-    <section id="servicios" class="py-16 bg-gray-100">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-8">
-                Nuestros Servicios
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Mantenimiento General</h3>
-                    <p class="text-lg">
-                        Aseguramos que tu vehículo funcione de manera óptima con nuestros servicios de
-                        mantenimiento.
-                    </p>
-                </div>
-                <div class="service-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Reparaciones Especializadas</h3>
-                    <p class="text-lg">
-                        Reparaciones rápidas y de calidad para cualquier tipo de problema mecánico.
-                    </p>
-                </div>
-                <div class="service-card bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Personalización</h3>
-                    <p class="text-lg">
-                        Personaliza tu vehículo con los mejores repuestos y accesorios para un toque único.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="servicios" class="py-16 bg-gray-100">
+    <section id="services" class="py-16 bg-gray-100">
         <div class="container mx-auto">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8">
                 Otros Servicios
@@ -88,7 +65,7 @@
 
 
     <!-- Banner Solicitar Servicio -->
-    <section class="relative bg-gradient-to-r from-black to-gray-800 text-white py-20">
+    <section id="reserve" class="relative bg-gradient-to-r from-black to-gray-800 text-white py-20">
         <div class="container mx-auto text-center">
             <h2 class="text-3xl sm:text-4xl font-bold mb-6">
                 ¿Tu vehículo necesita atención?
