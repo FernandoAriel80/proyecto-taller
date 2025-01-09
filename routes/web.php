@@ -24,7 +24,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');
     Route::post('/reserve-vehiculo', [ReservationController::class, 'saveVehicleData'])->name('reserve.store');
-    Route::post('/reserva-reserve', [ReservationController::class,'saveReserveData'])->name('reserve.save');
+    //Route::post('/reserva-reserve', [ReservationController::class,'saveReserveData'])->name('reserve.save');
+    
+    //Route::get('/turnos', [ReservationController::class, 'index'])->name('turnos.index');
+    Route::post('/reserva-reserve', [ReservationController::class, 'saveReserveData'])->name('reserve.save');
 });
 
 require __DIR__.'/auth.php';

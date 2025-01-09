@@ -9,6 +9,7 @@
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body>
@@ -21,7 +22,7 @@
 
     <div class=" items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
 
-        <div class="flex items-center justify-center pt-10">
+        <div class="flex items-center justify-center py-10">
             <div>
                 <a href="{{ route('dashboard') }}" class="text-3xl font-bold text-gray-400">
                     A&M Service
@@ -29,8 +30,8 @@
             </div>
         </div>
 
-        <div class="flex justify-center items-center min-h-screen ">
-            <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg shadow-lg w-7/12 p-6">
+        <div class="flex justify-center items-center ">
+            <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg shadow-lg w-7/12 p-3">
                 <!-- Botones de navegación -->
                 <div class="flex justify-around mb-6">
                     @if ($vehicles->isEmpty())
@@ -104,6 +105,7 @@
         content: "✓";
         padding-left: 5px;
     }
+
 </style>
 
 </html>
