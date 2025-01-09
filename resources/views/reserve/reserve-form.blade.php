@@ -15,77 +15,23 @@
             @endforeach
         </div>
         <div class="flex">
-            {{-- <div>
+            <div>
                 <div class="mb-4">
-                    <label for="date" class="block text-lg font-medium">Selecciona la fecha:</label>
-                    <select name="date" id="date" class="w-full px-4 py-2 border rounded bg-gray-500" required>
+                    <label for="datetime" class="block text-lg font-medium">Selecciona la fecha:</label>
+                    <select name="datetime" id="datetime" class="w-full px-4 py-2 border rounded bg-gray-500" required>
                         <option value="">Seleccione una fecha</option>
-
-                        @foreach ($fechasDisponibles as $disponible)
-                            <option value="{{ $disponible['date'] }}">
-                                {{ $disponible['date'] }}
+                        @foreach ($availableDates as $available)
+                            <option value="{{ $available['date'] }} {{ $available['time'] }}">
+                                {{ $available['date'] }} - {{ date('H:i', strtotime($available['time'])) }}
                             </option>
                         @endforeach
-
                     </select>
                     <small>Solo de luens a viernes</small>
-                    @error('date')
+                    @error('datetime')
                         <div class="text-red-500 text-sm">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <label for="time" class="block text-lg font-medium">Selecciona la hora:</label>
-                    <select name="time" id="time" class="w-full px-4 py-2 border rounded bg-gray-500" required>
-                        <option value="">Seleccione una hora</option>
-
-                        @foreach ($fechasDisponibles as $disponible)
-                            <option value="{{ $disponible['time'] }}">
-                                {{ $disponible['time'] }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <small>Hora de atencion de 9am a 6pm</small>
-                    @error('time')
-                        <div class="text-red-500 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div> --}}
-            <div>
-                <!-- Selección de la fecha -->
-                <div class="mb-4">
-                    <label for="date" class="block text-lg font-medium">Selecciona la fecha:</label>
-                    <select name="date" id="date" class="w-full px-4 py-2 border rounded bg-gray-500" required>
-                        <option value="">Seleccione una fecha</option>
-                        @foreach ($fechasHorasDisponibles['fechasDisponibles'] as $fecha)
-                            <option value="{{ $fecha }}">
-                                {{ \Carbon\Carbon::parse($fecha)->format('d/m/Y') }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <small>Solo de lunes a viernes</small>
-                    @error('date')
-                        <div class="text-red-500 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Selección de la hora -->
-                <div class="mb-4">
-                    <label for="time" class="block text-lg font-medium">Selecciona la hora:</label>
-                    <select name="time" id="time" class="w-full px-4 py-2 border rounded bg-gray-500" required>
-                        <option value="">Seleccione una hora</option>
-
-                        @foreach ($fechasHorasDisponibles['horasDisponibles'] as $hora)
-                            <option value="{{ $hora }}">
-                                {{ $hora }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <small>Hora de atención de 9 AM a 5 PM</small>
-                    @error('time')
-                        <div class="text-red-500 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
             </div>
 
             <div>

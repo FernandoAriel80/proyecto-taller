@@ -157,7 +157,7 @@
                             <!-- Segunda columna -->
                             <div>
                                 <div class="mb-4">
-                                    <label for="year" class="block text-gray-200 mb-2">Año del
+                                    <label for="year" class="text-gray-200 mb-2">Año del
                                         Vehículo
                                         (xxxx)</label>
                                     <input type="number" id="year" name="year"

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->time('time');
+            //$table->string('hora', 5);
             $table->string('description');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('vehicle_id');

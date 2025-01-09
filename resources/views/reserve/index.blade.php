@@ -53,8 +53,6 @@
                     @endif
                 </div>
 
-                <!-- Contenido vehiculo -->
-                {{--  {{ $slot }} --}}
                 @include('reserve.vehicle-form')
 
                 @include('reserve.reserve-form')

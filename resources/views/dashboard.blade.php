@@ -1,6 +1,11 @@
 <x-app-layout>
     <!-- Main Content -->
 
+    @if (session('success'))
+        <div class="bg-green-500 text-white p-4 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
     <!-- Banner -->
     <section class="relative bg-cover bg-center h-96"
         style="background-image: url('ruta-de-tu-imagen-del-taller-de-moto.jpg');">
