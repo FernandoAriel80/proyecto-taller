@@ -22,6 +22,8 @@ class Vehicle extends Model
         return $this->belongsTo(Brand::class);
     }
     
-    
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
+    }
     
 }

@@ -43,6 +43,10 @@
                                 {{ __('Administracion') }}
                             </x-dropdown-link>
                         @endif
+
+                        <x-responsive-nav-link :href="route('followUp.index')">
+                            {{ __('Seguimiento') }}
+                        </x-responsive-nav-link>
                         <!-- Authentication -->
 
                         <!-- Authentication -->
