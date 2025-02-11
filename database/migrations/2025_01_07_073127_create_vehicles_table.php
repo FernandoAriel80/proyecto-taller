@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('license_plate')->unique();
             $table->string('model');
+            $table->string('current_mileage');
+            $table->string('fuel_type');
             $table->integer('year');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('vehicle_type_id');

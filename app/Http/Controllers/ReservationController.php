@@ -83,6 +83,8 @@ class ReservationController extends Controller
         $validatedData = $request->validate([
             'license_plate' => 'required|unique:vehicles|max:10',
             'model' => 'required|string|max:50',
+            'current_mileage' => 'required|string|max:50',
+            'fuel_type' => 'required|string|max:50',
             'year' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
             'brand' => 'required|string',
             'vehicle_type' => 'required|integer|max:50',
@@ -92,6 +94,8 @@ class ReservationController extends Controller
             'license_plate.unique' => 'La patente ya está registrada.',
             'license_plate.max' => 'La patente no puede superar los 10 caracteres.',
             'model.required' => 'El modelo es obligatorio.',
+            'current_mileage.required' => 'La cantidad de millas es obligatorio.',
+            'fuel_type.required' => 'El tipo de combustible es obligatorio.',
             'year.required' => 'El año es obligatorio.',
             'year.integer' => 'El año debe ser un número entero.',
             'year.digits' => 'El año debe tener 4 dígitos.',
@@ -104,6 +108,8 @@ class ReservationController extends Controller
         Vehicle::create([
             'license_plate'=> $validatedData['license_plate'],
             'model'=> $validatedData['model'],
+            'current_mileage'=> $validatedData['current_mileage'],
+            'fuel_type'=> $validatedData['fuel_type'],
             'year'=> $validatedData['year'],
             'brand_id'=> $validatedData['brand'],
             'vehicle_type_id'=> $validatedData['vehicle_type'],

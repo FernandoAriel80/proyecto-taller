@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <div>
-                        <a href="{{ route('dashboard') }}" class="text-3xl font-bold text-gray-400">
+                        <a href="{{ route('dashboard') }}" class="text-3xl hover:text-gray-200 font-bold text-gray-400">
                             A&M Service
                         </a>
                     </div>

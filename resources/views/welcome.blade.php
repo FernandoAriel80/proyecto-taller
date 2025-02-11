@@ -19,7 +19,7 @@
     <header class="bg-gradient-to-r from-black via-gray-900 to-black py-4 shadow-md">
         <div class="container mx-auto flex items-center justify-between px-4">
             <div>
-                <a href="{{ route('welcome') }}" class="text-3xl font-bold text-gray-400">
+                <a href="{{ route('welcome') }}" class="text-3xl hover:text-gray-200 font-bold text-gray-400">
                     A&M Service
                 </a>
             </div>

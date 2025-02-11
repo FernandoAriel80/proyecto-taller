@@ -24,7 +24,7 @@
 
         <div class="flex items-center justify-center py-10">
             <div>
-                <a href="{{ route('dashboard') }}" class="text-3xl font-bold text-gray-400">
+                <a href="{{ route('dashboard') }}" class=" hover:text-gray-200 text-3xl font-bold text-gray-400">
                     A&M Service
                 </a>
             </div>
