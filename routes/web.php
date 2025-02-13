@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,12 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['role:admin'])->group(function () {    
         Route::get('/admin/menu', [AdminController::class, 'index'])->name('admin.menu');
+        Route::get('/admin/clientes', function(){
+            return view("admin.customer.index");
+        })->name('admin.customer');
+
+        Route::get('/admin/empleados', [UserController::class, 'index'])->name('employee.index');
+        Route::post('/admin/empleados', [UserController::class, 'store'])->name('employee.store');
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');
