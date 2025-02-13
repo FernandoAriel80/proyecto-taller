@@ -13,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("admin.employee.index")->with("message" , "error");
+        $users = User::where("role","=","admin")->get();
+        $message = "error";
+        return view("admin.employee.index", compact(['users','message']));
     }
 
     /**
@@ -21,7 +23,9 @@ class UserController extends Controller
      */
     public function create()
     {
-       
+        $users = User::where("role","=","admin");
+       //return view("admin.employee.index", compact(['users']));
+       return view("admin.employee.index")->with("users" , $users);
     }
 
     /**
@@ -61,7 +65,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id)->get();
+        return view("admin.employee.index", compact(['user']));
     }
 
     /**
