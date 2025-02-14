@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
@@ -22,15 +24,14 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['role:admin'])->group(function () {    
         Route::get('/admin/menu', [AdminController::class, 'index'])->name('admin.menu');
-        Route::get('/admin/clientes', function(){
-            return view("admin.customer.index");
-        })->name('admin.customer');
 
-        Route::get('/admin/empleados', [UserController::class, 'index'])->name('employee.index');
-        Route::post('/admin/empleados', [UserController::class, 'store'])->name('employee.store');
-        Route::get('/admin/empleados/{id}', [UserController::class, 'edit'])->name('employee.edit');
-        Route::put('/admin/empleados/{id}', [UserController::class, 'update'])->name('employee.update');
-        Route::delete('/admin/empleados/{id}', [UserController::class, 'destroy'])->name('employee.destroy');
+        Route::get('/admin/clientes', [CustomerController::class,'index'])->name('customer.index');
+
+        Route::get('/admin/empleados', [EmployeeController::class, 'index'])->name('employee.index');
+        Route::post('/admin/empleados', [EmployeeController::class, 'store'])->name('employee.store');
+        Route::get('/admin/empleados/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+        Route::put('/admin/empleados/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+        Route::delete('/admin/empleados/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');

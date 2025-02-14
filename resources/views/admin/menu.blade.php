@@ -27,7 +27,7 @@
         <div class="bg-gray-900 shadow-lg rounded-lg p-6 w-80 text-center">
             <h1 class="text-2xl font-bold text-gray-100 mb-4">Menu Admin</h1>
             <nav class="flex flex-col space-y-3">
-                <a href="{{ route('admin.customer') }}" class="text-lg font-medium text-gray-300 hover:text-white">Clientes</a>
+                <a href="{{ route('customer.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Clientes</a>
                 <a href="{{ route('employee.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Empleados</a>
             {{--<a href="{{ route('dashboard') }}" class="text-lg font-medium text-gray-300 hover:text-white">Autos</a>
                 <a href="{{ route('reportes') }}" class="text-lg font-medium text-gray-300 hover:text-white">comprobante</a> --}}

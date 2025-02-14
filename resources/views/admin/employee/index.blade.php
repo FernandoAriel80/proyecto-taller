@@ -53,21 +53,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($employees as $employee)
                                     <tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
-                                        <td class="py-3 px-4">{{ $user->id }}</td>
-                                        <td class="py-3 px-4">{{ $user->name }}</td>
-                                        <td class="py-3 px-4">{{ $user->email }}</td>
-                                        <td class="py-3 px-4">{{ $user->dni }}</td>
-                                        <td class="py-3 px-4">{{ $user->phone_number }}</td>
-                                        <td class="py-3 px-4">{{ $user->created_at }}</td>
+                                        <td class="py-3 px-4">{{ $employee->id }}</td>
+                                        <td class="py-3 px-4">{{ $employee->name }}</td>
+                                        <td class="py-3 px-4">{{ $employee->email }}</td>
+                                        <td class="py-3 px-4">{{ $employee->dni }}</td>
+                                        <td class="py-3 px-4">{{ $employee->phone_number }}</td>
+                                        <td class="py-3 px-4">
+                                            @if ($employee->created_at)
+                                                {{ $employee->created_at->timezone('America/Argentina/Buenos_Aires')->format('d/m/Y H:i:s') }}
+                                            @else
+                                                Fecha no disponible
+                                            @endif
+                                        </td>
                                         <td>
                                             <button class="p-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md">
-                                                <a href="{{ route('employee.edit', [$user->id]) }}">Actualizar</a>
+                                                <a href="{{ route('employee.edit', [$employee->id]) }}">Actualizar</a>
                                             </button>
 
                                             <!-- Botón de Eliminar -->
-                                            <form action="{{ route('employee.destroy', $user->id) }}" method="POST"
+                                            <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
                                                 class="inline-block">
                                                 @csrf
                                                 @method('DELETE')

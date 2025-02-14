@@ -5,13 +5,13 @@
             <button class="bg-red-500 text-white px-4 py-2 rounded-md">
                 <a href="{{ route('employee.index') }}">Volver</a>
             </button>
-            <form action="{{ route('employee.update', $user->id) }}" method="POST" class="m-5">
+            <form action="{{ route('employee.update', $employee->id) }}" method="POST" class="m-5">
                 @csrf
                 @method("PUT")
-                <x-input-modal name="name" type="text" value="{{ $user->name }}" placeholder="Nombre" required />
-                <x-input-modal name="email" type="email" value="{{ $user->email }}" placeholder="Correo" required />
-                <x-input-modal name="dni" type="text" value="{{ $user->dni }}" placeholder="DNI" required />
-                <x-input-modal name="phone_number" type="text" value="{{ $user->phone_number }}" placeholder="Numero de Celular" required />
+                <x-input-modal name="name" type="text" value="{{ $employee->name }}" placeholder="Nombre" required />
+                <x-input-modal name="email" type="email" value="{{ $employee->email }}" placeholder="Correo" required />
+                <x-input-modal name="dni" type="text" value="{{ $employee->dni }}" placeholder="DNI" required />
+                <x-input-modal name="phone_number" type="text" value="{{ $employee->phone_number }}" placeholder="Numero de Celular" required />
                 <x-input-modal name="password" type="password" placeholder="Clave" required />
                 <x-input-modal name="password_confirmation" type="password" placeholder="Confirmar Clave" required />
                 <button type="submit" class="w-full bg-blue-600 p-2 rounded-md text-white"> Guardar

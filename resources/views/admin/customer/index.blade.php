@@ -1,29 +1,46 @@
 <x-app-layout>
-    <h1>clientes</h1>
-    <!-- Botón para abrir el modal -->
-    <button onclick="openModal()" class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-xl transition">
-        Crear Cliente
-    </button>
+    <div class="px-4 bg-slate-700">
+        <div class="flax items-center content-center mx-20">
+            <div class="py-5">
+                <h1 class="text-center text-3xl font-bold mb-4 text-gray-200">Clientes</h1>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-xl font-bold mb-4">Título del Modal</h2>
-            <p class="mb-4">Este es un modal con JavaScript y TailwindCSS.</p>
-            <button onclick="closeModal()" class="bg-red-500 text-white px-4 py-2 rounded-md">
-                Cerrar
-            </button>
+                <section class="p-4">
+                    <div class="overflow-x-auto shadow-md rounded-lg">
+                        <table class="min-w-full bg-white border border-gray-200">
+                            <thead class="bg-slate-500 text-white">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">ID</th>
+                                    <th class="py-3 px-4 text-left">Nombre</th>
+                                    <th class="py-3 px-4 text-left">Correo</th>
+                                    <th class="py-3 px-4 text-left">DNI</th>
+                                    <th class="py-3 px-4 text-left">Número de Teléfono</th>
+                                    <th class="py-3 px-4 text-left">Fecha de Creación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($customers as $customer)
+                                    <tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
+                                        <td class="py-3 px-4">{{ $customer->id }}</td>
+                                        <td class="py-3 px-4">{{ $customer->name }}</td>
+                                        <td class="py-3 px-4">{{ $customer->email }}</td>
+                                        <td class="py-3 px-4">{{ $customer->dni }}</td>
+                                        <td class="py-3 px-4">{{ $customer->phone_number }}</td>
+                                        <td class="py-3 px-4">
+                                            @if ($customer->created_at)
+                                                {{ $customer->created_at->timezone('America/Argentina/Buenos_Aires')->format('d/m/Y H:i:s') }}
+                                            @else
+                                                Fecha no disponible
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
         </div>
     </div>
 
 </x-app-layout>
-
-<script>
-    function openModal() {
-        document.getElementById("modal").classList.remove("hidden");
-    }
-
-    function closeModal() {
-        document.getElementById("modal").classList.add("hidden");
-    }
-</script>
