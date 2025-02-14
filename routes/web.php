@@ -28,8 +28,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/admin/empleados', [UserController::class, 'index'])->name('employee.index');
         Route::post('/admin/empleados', [UserController::class, 'store'])->name('employee.store');
-        Route::post('/admin/empleados', [UserController::class, 'edit'])->name('employee.edit');
-        Route::put('/admin/empleados', [UserController::class, 'update'])->name('employee.update');
+        Route::get('/admin/empleados/{id}', [UserController::class, 'edit'])->name('employee.edit');
+        Route::put('/admin/empleados/{id}', [UserController::class, 'update'])->name('employee.update');
+        Route::delete('/admin/empleados/{id}', [UserController::class, 'destroy'])->name('employee.destroy');
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');

@@ -13,12 +13,14 @@ class InputModal extends Component
      */
     public string $name;
     public string $type;
-    public string $value ;
+    public string $value;
+    public string $placeholder;
 
-    public function __construct( string $name, string $type, string $value )
+    public function __construct( string $name, string $type, string $placeholder , string $value = "" )
     {
         $this->name = $name;
         $this->type = $type;
+        $this->placeholder = $placeholder;
         $this->value  = $value ;
     }
 
