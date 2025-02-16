@@ -11,11 +11,26 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = User::all();
+        $query = User::query();
+        $search = $request->input('search', ''); 
+        
+        $query->where("role", "=", "cliente");
+        
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'LIKE', "%$search%")
+                  ->orWhere('name', 'LIKE', "%$search%")
+                  ->orWhere('dni', 'LIKE', "%$search%");
+            });
+        }
+        
 
-        return view("admin.customer.index",compact("customers"));
+        $customers = $query->paginate(5);
+
+        return view("admin.customer.index", compact('customers', 'search'));
+        
     }
 
     /**

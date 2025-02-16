@@ -12,11 +12,25 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = User::where("role","=","admin")->get();
         $message = "error";
-        return view("admin.employee.index", compact(['employees','message']));
+        $query = User::query();
+        $search = $request->input('search', '');
+        
+        $query->where("role", "=", "admin");
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'LIKE', "%$search%")
+                    ->orWhere('name', 'LIKE', "%$search%")
+                    ->orWhere('dni', 'LIKE', "%$search%");
+            });
+        }
+
+        $employees = $query->paginate(5);
+
+        return view("admin.employee.index", compact('employees', 'search', 'message'));
     }
 
     /**
@@ -24,8 +38,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employees = User::where("role","=","admin");
-       return view("admin.employee.index")->with("employees" , $employees);
+        $employees = User::where("role", "=", "admin");
+        return view("admin.employee.index")->with("employees", $employees);
     }
 
     /**
@@ -39,7 +53,7 @@ class EmployeeController extends Controller
             'dni' => 'required|digits:8|unique:users',
             'phone_number' => 'required|string|regex:/^[0-9]{10}$/',
             'password' => 'required|min:8|confirmed',
-        ],[
+        ], [
             'name.required' => 'El nombre es obligatoria.',
             'email.required' => 'El correo es obligatoria.',
             'email.unique' => 'El correo ya está registrada.',
@@ -68,10 +82,7 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-       
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -79,7 +90,7 @@ class EmployeeController extends Controller
     public function edit(string $id)
     {
         $employee = User::findOrFail($id);
-        return view("admin.employee.edit",compact('employee'));
+        return view("admin.employee.edit", compact('employee'));
     }
 
     /**
@@ -93,7 +104,7 @@ class EmployeeController extends Controller
             'dni' => 'required|digits:8',
             'phone_number' => 'required|string|regex:/^[0-9]{10}$/',
             'password' => 'nullable|min:8|confirmed',
-        ],[
+        ], [
             'name.required' => 'El nombre es obligatoria.',
             'email.required' => 'El correo es obligatoria.',
             'dni.required' => 'El dni es obligatoria.',
@@ -108,13 +119,13 @@ class EmployeeController extends Controller
         $employee = User::findOrFail($id);
         $employee->update([
             'name' => $request->name,
-            'email' => $request->email != $employee->email ?$request->email:$employee->email,
-            'dni' => $request->dni != $employee->dni ?$request->dni:$employee->dni,
-            'phone_number' => $request->phone_number != $employee->phone_number ?$request->phone_number:$employee->phone_number,
+            'email' => $request->email != $employee->email ? $request->email : $employee->email,
+            'dni' => $request->dni != $employee->dni ? $request->dni : $employee->dni,
+            'phone_number' => $request->phone_number != $employee->phone_number ? $request->phone_number : $employee->phone_number,
             'password' => $request->password ?? Hash::make($request->password)
         ]);
 
-        return redirect(route("employee.index"))->with("success","Usuario se actualizo correctamente");
+        return redirect(route("employee.index"))->with("success", "Usuario se actualizo correctamente");
     }
 
     /**
@@ -126,6 +137,6 @@ class EmployeeController extends Controller
 
         $employee->delete();
 
-        return redirect(route("employee.index"))->with("success","Usuario se elimino correctamente");
+        return redirect(route("employee.index"))->with("success", "Usuario se elimino correctamente");
     }
 }
