@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class AdminController extends Controller
 {
@@ -12,8 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.menu');
-
+        $reservations = Reservation::with(['user','vehicle'])->get();
+        return view('admin.reservations.index',compact('reservations'));
     }
 
     /**

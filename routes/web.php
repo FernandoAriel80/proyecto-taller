@@ -23,7 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware(['role:admin'])->group(function () {    
-        Route::get('/admin/menu', [AdminController::class, 'index'])->name('admin.menu');
+        Route::get('/admin/menu', function(){
+            return view('admin.menu');
+        })->name('admin.menu');
 
         Route::get('/admin/clientes', [CustomerController::class,'index'])->name('customer.index');
 
@@ -32,6 +34,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/empleados/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
         Route::put('/admin/empleados/{id}', [EmployeeController::class, 'update'])->name('employee.update');
         Route::delete('/admin/empleados/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+
+
+        Route::get('/reservas-de-usuarios',[AdminController::class, 'index'])->name('reservations.index');
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');

@@ -19,7 +19,7 @@
 <body class="font-sans text-gray-900 antialiased bg-black">
     <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
         <div class="mb-6">
-            <a href="{{ route('welcome') }}" class="text-4xl font-extrabold text-gray-200 hover:text-gray-400">
+            <a href="{{ route('dashboard') }}" class="text-4xl font-extrabold text-gray-200 hover:text-gray-400">
                 A&M Service
             </a>
         </div>
@@ -29,8 +29,8 @@
             <nav class="flex flex-col space-y-3">
                 <a href="{{ route('customer.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Clientes</a>
                 <a href="{{ route('employee.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Empleados</a>
-            {{--<a href="{{ route('dashboard') }}" class="text-lg font-medium text-gray-300 hover:text-white">Autos</a>
-                <a href="{{ route('reportes') }}" class="text-lg font-medium text-gray-300 hover:text-white">comprobante</a> --}}
+                <a href="{{ route('reservations.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Reservas</a>
+              {{--  <a href="{{ route('reportes') }}" class="text-lg font-medium text-gray-300 hover:text-white">comprobante</a> --}}
             </nav>
         </div>
     </div>
