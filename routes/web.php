@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
 
 
         Route::get('/reservas-de-usuarios',[AdminController::class, 'index'])->name('reservations.index');
+        Route::put('/reservas-de-usuarios-conformado/{id}',[AdminController::class, 'confirmed'])->name('reservations.confirmed');
+        Route::put('/reservas-de-usuarios-rechazado/{id}',[AdminController::class, 'decline'])->name('reservations.decline');
+
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');

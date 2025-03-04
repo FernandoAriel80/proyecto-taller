@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('vehicle_id');
+            $table->boolean('is_confirmed')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

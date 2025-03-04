@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'password' =>  bcrypt('12345678'),
                 'dni' => '12345678',
                 'phone_number' => '1122334455',
-                'role' => 'cliente',
+                'role' => 'admin',
             ],
         ];
         DB::table('users')->insert($users);

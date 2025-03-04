@@ -13,8 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with(['user','vehicle'])->get();
-        return view('admin.reservations.index',compact('reservations'));
+        $reservations = Reservation::with(['user', 'vehicle'])->get();
+        return view('admin.reservations.index', compact('reservations'));
     }
 
     /**
@@ -44,17 +44,32 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function confirmed(string $id)
     {
-        //
+        try {
+            $reservation = Reservation::findOrFail($id);
+            $reservation->is_confirmed = 1;
+            $reservation->save(); 
+            return redirect()->route('reservations.index');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    public function decline(string $id)
+    {
+        try {
+            $reservation = Reservation::findOrFail($id);
+            $reservation->is_confirmed = 0;
+            $reservation->save(); 
+            return redirect()->route('reservations.index');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
