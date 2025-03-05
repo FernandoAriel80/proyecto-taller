@@ -12,8 +12,8 @@ class FollowUpController extends Controller
      */
     public function index( Request $request )
     {
-        $reservations = Reservation::with(['user','vehicle'])->where("user_id", $request->user()->id)->get();   
-        return view('followUp.index',compact('reservations'));
+        $reservations = Reservation::with(['user','vehicle'])->where("user_id", $request->user()->id)->orderByDesc("id")->get();   
+        return view('followUp.reservations.index',compact('reservations'));
     }
 
     public function details( Request $request ){

@@ -49,6 +49,9 @@ Route::middleware('auth')->group(function () {
     //Route::get('/turnos', [ReservationController::class, 'index'])->name('turnos.index');
     Route::post('/reserva-reserve', [ReservationController::class, 'saveReserveData'])->name('reserve.save');
 
+    Route::get("/seguimiento-menu",function(){
+        return view("followUp.menu");
+    })->name("followUp.menu");
     Route::get('/seguimiento', [FollowUpController::class, 'index'])->name('followUp.index');
     Route::get('/seguimiento-detalles', [FollowUpController::class, 'details'])->name('followUp.details');
 });

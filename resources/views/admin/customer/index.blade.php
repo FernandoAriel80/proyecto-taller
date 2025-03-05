@@ -15,7 +15,7 @@
                 @if ($customers->count())
                     <section class="p-4">
                         <div class="overflow-x-auto shadow-md rounded-lg">
-                            <table class="min-w-full bg-white border border-gray-200">
+                            <table class="min-w-full bg-white border-gray-200">
                                 <thead class="bg-slate-500 text-white">
                                     <tr>
                                         <th class="py-3 px-4 text-left">ID</th>

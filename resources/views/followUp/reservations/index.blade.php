@@ -2,20 +2,7 @@
     <div class="px-4 bg-slate-700">
         <div class="flax items-center content-center mx-20 py-5">
             <h1 class="text-xl font-bold mb-4 text-gray-200 text-center">Reservas</h1>
-            <section>
-                <div class="flex justify-end">
-                    <div class="grid grid-cols-1 gap-1">
-                        <h4 class="text-gray-300">Se pueden filtrar por:</h4>
-                        <h4 class="text-gray-300">Fecha:00-00-0000, Nombre, DNI y Patente</h4>
-                        <form action="{{ route('reservations.index') }}" method="GET">
-                            {{-- @csrf --}}
-                            <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
-                                placeholder="Buscar">
-                            <button type="submit" class="p-2 bg-red-600 hover:bg-red-700 rounded-md text-white">Buscar</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
+
             <!-- Modal Vehicle -->
             <section>
                 <div id="modalVehicle"
@@ -123,7 +110,6 @@
                                     <th class="px-4 py-2 text-left">Fecha</th>
                                     <th class="px-4 py-2 text-left">Detalles</th>
                                     <th class="px-4 py-2 text-left">Confirmación</th>
-                                    <th class="px-4 py-2 text-left">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,10 +117,8 @@
                                     <tr class="hover:bg-gray-50 transition-colors border-b border-gray-200">
                                         <td class="px-4 py-2">{{ $reservation->id }}</td>
                                         <td class="px-4 py-2">{{ $reservation->user->name }}</td>
-                                        <td class="px-4 py-2">
-                                            {{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
-                                        <td class="px-4 py-2">
-                                            {{ \Carbon\Carbon::parse($reservation->date)->format('d-m-Y') }}</td>
+                                        <td class="px-4 py-2">{{ \Carbon\Carbon::parse($reservation->time)->format("H:i") }}</td>
+                                        <td class="px-4 py-2">{{ \Carbon\Carbon::parse($reservation->date)->format("d-m-Y") }}</td>
                                         <td class="px-4 py-2">
                                             <div class="flex space-x-2">
                                                 <button onclick="openUserModal()"
@@ -149,53 +133,18 @@
                                         </td>
                                         @if ($reservation->is_confirmed == 0)
                                             <td class="px-4 py-2 text-red-700">No Confirmado</td>
-                                            <td class="px-4 py-2">
-                                                <div class="flex space-x-2">
-                                                    <form
-                                                        action="{{ route('reservations.confirmed', $reservation->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                            class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                            Confirmar
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
                                         @else
                                             <td class="px-4 py-2 text-green-700">Confirmado</td>
-                                            <td class="px-4 py-2">
-                                                <div class="flex space-x-2">
-                                                    <form
-                                                        action="{{ route('reservations.decline', $reservation->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                            class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                            Rechazar
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
                                         @endif
-
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </section>
-                <section>
-                    <!-- Paginación -->
-                    <div class="mt-4">
-                        {{ $reservations->appends(['search' => request('search')])->links() }}
-                    </div>
-                </section>
             @else
                 <section class="mt-8">
-                    <h4 class="text-xl text-gray-300">No hay reservas</h4>
+                    <h4 class="text-xl text-gray-50">No hay reservas</h4>
                 </section>
             @endif
         </div>
