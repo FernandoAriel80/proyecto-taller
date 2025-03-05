@@ -11,7 +11,8 @@
                             {{-- @csrf --}}
                             <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
                                 placeholder="Buscar">
-                            <button type="submit" class="p-2 bg-red-600 hover:bg-red-700 rounded-md text-white">Buscar</button>
+                            <button type="submit"
+                                class="p-2 bg-red-600 hover:bg-red-700 rounded-md text-white">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -121,9 +122,9 @@
                                     <th class="px-4 py-2 text-left">Nombre</th>
                                     <th class="px-4 py-2 text-left">Hora</th>
                                     <th class="px-4 py-2 text-left">Fecha</th>
-                                    <th class="px-4 py-2 text-left">Detalles</th>
+                                    <th class="px-4 py-2 text-center">Detalles</th>
                                     <th class="px-4 py-2 text-left">Confirmación</th>
-                                    <th class="px-4 py-2 text-left">Acciones</th>
+                                    <th class="px-4 py-2 text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -177,6 +178,13 @@
                                                             Rechazar
                                                         </button>
                                                     </form>
+                                                    <a
+                                                        href="{{ route('register.vehicle.create', $reservation->id) }}">
+                                                        <button type="submit"
+                                                            class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                                            Registrar en taller
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         @endif

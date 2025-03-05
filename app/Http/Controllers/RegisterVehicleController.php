@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class RegisterVehicleController extends Controller
@@ -12,15 +13,22 @@ class RegisterVehicleController extends Controller
      */
     public function index()
     {
-        return view('admin.registerVehicle.index');
+        $reservations = Reservation::all();
+        return view('admin.registerVehicle.index',compact("reservations"));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        //
+        try {
+            $reservation = Reservation::with(['user','vehicle'])->findOrFail($id); 
+
+            return view('admin.reservations.create',compact('reservation'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -28,7 +36,8 @@ class RegisterVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+    
     }
 
     /**

@@ -29,8 +29,8 @@
             <nav class="flex flex-col space-y-3">
                 <a href="{{ route('customer.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Clientes</a>
                 <a href="{{ route('employee.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Empleados</a>
-                <a href="{{ route('reservations.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Reservas</a>
-                <a href="{{ route('register.vehicle.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Registar Vehiculo</a>
+                <a href="{{ route('reservations.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Reservas y Registrar Vehiculos</a>
+                <a href="{{ route('register.vehicle.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Vehiculos en Taller</a>
             </nav>
         </div>
     </div>
