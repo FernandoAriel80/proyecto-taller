@@ -30,7 +30,7 @@
                 <a href="{{ route('customer.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Clientes</a>
                 <a href="{{ route('employee.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Empleados</a>
                 <a href="{{ route('reservations.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Reservas</a>
-              {{--  <a href="{{ route('reportes') }}" class="text-lg font-medium text-gray-300 hover:text-white">comprobante</a> --}}
+                <a href="{{ route('register.vehicle.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Registar Vehiculo</a>
             </nav>
         </div>
     </div>

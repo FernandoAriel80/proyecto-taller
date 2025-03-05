@@ -6,7 +6,7 @@
                 <div class="flex justify-end">
                     <div class="grid grid-cols-1 gap-1">
                         <h4 class="text-gray-300">Se pueden filtrar por:</h4>
-                        <h4 class="text-gray-300">Fecha:00-00-0000, Nombre, DNI y Patente</h4>
+                        <h4 class="text-gray-300">Fecha:DD-MM-AAAA, Nombre, DNI y Patente</h4>
                         <form action="{{ route('reservations.index') }}" method="GET">
                             {{-- @csrf --}}
                             <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"

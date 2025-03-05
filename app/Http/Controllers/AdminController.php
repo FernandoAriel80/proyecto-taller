@@ -14,8 +14,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        /* $reservations = Reservation::with(['user', 'vehicle'])->orderByDesc("id")->get();
-        return view('admin.reservations.index', compact('reservations')); */
+        
         $query = Reservation::query();
         $search = $request->input('search', '');
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterVehicleController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -40,13 +41,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/reservas-de-usuarios-conformado/{id}',[AdminController::class, 'confirmed'])->name('reservations.confirmed');
         Route::put('/reservas-de-usuarios-rechazado/{id}',[AdminController::class, 'decline'])->name('reservations.decline');
 
+        Route::get('/registrar-vehiculo-en-taller',[RegisterVehicleController::class, 'index'])->name('register.vehicle.index');
+
     });
 
     Route::get('/reserve-form', [ReservationController::class, 'showVehicleData'])->name('reserve.create');
     Route::post('/reserve-vehiculo', [ReservationController::class, 'saveVehicleData'])->name('reserve.store');
-    //Route::post('/reserva-reserve', [ReservationController::class,'saveReserveData'])->name('reserve.save');
     
-    //Route::get('/turnos', [ReservationController::class, 'index'])->name('turnos.index');
     Route::post('/reserva-reserve', [ReservationController::class, 'saveReserveData'])->name('reserve.save');
 
     Route::get("/seguimiento-menu",function(){
