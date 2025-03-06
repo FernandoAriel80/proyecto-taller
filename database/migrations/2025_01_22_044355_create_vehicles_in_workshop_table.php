@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('vehicles_in_workshop', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reservation_id');
-            $table->text('general_information');
-            $table->string('status'); // En revisión, En reparación, Listo para retirar
-            $table->date('check_in_date');
-            $table->date('check_out_date');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->string('vehicle_type');
+            $table->string('brand');
+            $table->string('license_plate');
+            $table->string('year');
+            $table->text('description');
+            $table->unsignedBigInteger('status_id')->default(1);
+            $table->date('check_in_date')->nullable();
+            $table->date('check_out_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign("status_id")->references("id")->on("statuses");
         });
     }
 

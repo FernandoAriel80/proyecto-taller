@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('budgets', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vehicles_in_workshop_id');
-            $table->string('status'); //"Pendiente", "Aprobado", "Rechazado"
+            $table->string('name'); //"Pendiente", "Aprobado", "Rechazado"
             $table->timestamps();
-
-            $table->foreign('vehicles_in_workshop_id')->references('id')->on('vehicles_in_workshop');
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('budgets');
+        Schema::dropIfExists('statuses');
     }
 };

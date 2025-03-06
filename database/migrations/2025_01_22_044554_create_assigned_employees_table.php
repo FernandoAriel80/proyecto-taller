@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('assigned_employees', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("vehicle_in_workshop_id");
             $table->timestamps();
+
+            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("vehicle_in_workshop_id")->references("id")->on("vehicles_in_workshop");
+
         });
     }
 
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('assigned_employees');
     }
 };

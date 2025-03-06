@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('budget_items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('assigned_employee_id');
             $table->string('name');
             $table->integer('amount');
             $table->text('description');
             $table->decimal('price',8,2);
             $table->decimal('total_price',8,2);
             $table->timestamps();
+
+            $table->foreign('assigned_employee_id')->references('id')->on('assigned_employees');
         });
     }
 
