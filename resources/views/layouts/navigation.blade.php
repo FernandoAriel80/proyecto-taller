@@ -44,9 +44,9 @@
                             </x-dropdown-link>
                         @endif
 
-                        <x-responsive-nav-link :href="route('followUp.menu')">
+                        <x-dropdown-link :href="route('followUp.menu')">
                             {{ __('Seguimiento') }}
-                        </x-responsive-nav-link>
+                        </x-dropdown-link>
                         <!-- Authentication -->
 
                         <!-- Authentication -->

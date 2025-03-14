@@ -15,7 +15,8 @@
                         {{-- @csrf --}}
                         <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
                             placeholder="Buscar">
-                        <button type="submit" class="p-2 bg-red-600 hover:bg-red-700 rounded-md ">Buscar</button>
+                        <button type="submit"
+                            class="p-2 bg-red-600 hover:bg-red-700 rounded-md text-white ">Buscar</button>
                     </form>
                 </div>
             </section>
@@ -49,6 +50,7 @@
                                     <th class="px-4 py-2 text-left">Detalles</th>
                                     <th class="px-4 py-2 text-left">Fecha Entrada</th>
                                     <th class="px-4 py-2 text-left">Fecha Salida</th>
+                                    <th class="px-4 py-2 text-left">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,6 +111,17 @@
                                         </td>
                                         <td class="px-4 py-2">
                                             {{ $in_workshop->check_out_date != null ? \Carbon\Carbon::parse($in_workshop->check_out_date)->format('d-m-Y') : 'No hay fecha' }}
+                                        </td>
+                                        <td>
+                                            {{--  --}}
+                                            <button class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                                <a
+                                                    href="{{ route('register.vehicle.edit', $in_workshop->id) }}">Actualizar</a>
+                                            </button>
+                                            <button onclick="confirmedModal({{ $in_workshop->id }})"
+                                                class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                                Dar de Alta
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
