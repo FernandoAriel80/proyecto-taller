@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/registrar-vehiculo-en-taller',[RegisterVehicleController::class, 'store'])->name('register.vehicle.store');
         Route::get('/actualizar-vehiculo-en-taller/{id}',[RegisterVehicleController::class, 'edit'])->name('register.vehicle.edit');
         Route::put('/actualizar-vehiculo-en-taller/{id}',[RegisterVehicleController::class, 'update'])->name('register.vehicle.update');
+        Route::put('/dar-de-alta-vehiculo-en-taller/{id}',[RegisterVehicleController::class,'releaseVehicle']);
 
     });
 

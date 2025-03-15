@@ -12,7 +12,6 @@
             <section>
                 <div class="flex justify-end">
                     <form action="{{ route('register.vehicle.index') }}" method="GET">
-                        {{-- @csrf --}}
                         <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
                             placeholder="Buscar">
                         <button type="submit"
@@ -36,6 +35,31 @@
                     </div>
                 </div>
             </section>
+            <!-- Modal (oculto por defecto) -->
+            <section>
+                <div id="deleteModal"
+                    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+                        <h2 class="text-xl font-semibold">¿Estás seguro?</h2>
+                        <p>Vas a dar de alta este vehiculo, esta acción no se puede deshacer.</p>
+
+                        <div class="mt-4 flex justify-end space-x-2">
+                            <button onclick="closeConfirmModal()"
+                                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700">
+                                Cancelar
+                            </button>
+                            <form id="deleteForm" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+                                    Confirmar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- Tabla de Reservas -->
             @if ($in_workshops->count())
@@ -118,9 +142,11 @@
                                                 <a
                                                     href="{{ route('register.vehicle.edit', $in_workshop->id) }}">Actualizar</a>
                                             </button>
-                                            <button onclick="confirmedModal({{ $in_workshop->id }})"
+                                            <!-- Botón para eliminar -->
+
+                                            <button onclick="openConfirmModal({{ $in_workshop->id }})"
                                                 class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                Dar de Alta
+                                                Dar de alta
                                             </button>
                                         </td>
                                     </tr>
@@ -160,5 +186,14 @@
 
     function claseDescriptionModal(id) {
         document.getElementById('modalDescription' + id).classList.add('hidden');
+    }
+
+    function openConfirmModal(productId) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteForm').action = `/dar-de-alta-vehiculo-en-taller/${productId}`;
+    }
+
+    function closeConfirmModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
     }
 </script>

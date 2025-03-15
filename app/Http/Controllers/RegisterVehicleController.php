@@ -86,7 +86,7 @@ class RegisterVehicleController extends Controller
     {
         try {
             $in_workshop = VehicleInWorkshop::findOrFail($id);
-            return view('admin.registerVehicle.edit',compact('in_workshop'));
+            return view('admin.registerVehicle.edit', compact('in_workshop'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -123,8 +123,21 @@ class RegisterVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function releaseVehicle(string $id)
     {
-        //
+        try {
+
+            $current_vehicle = VehicleInWorkshop::findOrFail($id);
+
+            if ($current_vehicle->check_out_date != null) {
+                return redirect()->route('register.vehicle.index');
+            }
+            $current_vehicle->check_out_date = now();
+            $current_vehicle->save();
+            return redirect()->route('register.vehicle.index');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
