@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -31,29 +33,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'dni' => 'required|digits:8|unique:users',
-            'phone_number' => 'required|string|regex:/^[0-9]{10}$/',
-            'password' => 'required|min:8|confirmed',
-        ],[
-            'name.required' => 'El nombre es obligatoria.',
-            'email.required' => 'El correo es obligatoria.',
-            'email.unique' => 'El correo ya está registrada.',
-            'dni.required' => 'El dni es obligatoria.',
-            'dni.unique' => 'El dni ya está registrada.',
-            'dni.digits' => 'El dni tiene que tener 8 caracteres.',
-            'phone_number.required' => 'El campo número de teléfono es obligatorio.',
-            'phone_number.string' => 'El número de teléfono debe ser una cadena de texto.',
-            'phone_number.regex' => 'El número de teléfono debe tener exactamente 10 dígitos y tiene que ser numero.',
-            'password.required' => 'La clave es obligatoria.',
-            'password.min' => 'La clave tiene que tener 8 digitos como minimo.',
-            'password.confirmed' => 'Las claves no coinciden.',
-        ]);
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -84,25 +65,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email',
-            'dni' => 'required|digits:8',
-            'phone_number' => 'required|string|regex:/^[0-9]{10}$/',
-            'password' => 'nullable|min:8|confirmed',
-        ],[
-            'name.required' => 'El nombre es obligatoria.',
-            'email.required' => 'El correo es obligatoria.',
-            'dni.required' => 'El dni es obligatoria.',
-            'dni.digits' => 'El dni tiene que tener 8 caracteres.',
-            'phone_number.required' => 'El campo número de teléfono es obligatorio.',
-            'phone_number.string' => 'El número de teléfono debe ser una cadena de texto.',
-            'phone_number.regex' => 'El número de teléfono debe tener exactamente 10 dígitos y tiene que ser numero.',
-            'password.required' => 'La clave es obligatoria.',
-            'password.min' => 'La clave tiene que tener 8 digitos como minimo.',
-        ]);
 
         $user = User::findOrFail($id);
         $user->update([

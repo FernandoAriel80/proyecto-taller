@@ -31,6 +31,7 @@
                 <a href="{{ route('employee.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Empleados</a>
                 <a href="{{ route('reservations.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Reservas y Registrar Vehiculos</a>
                 <a href="{{ route('register.vehicle.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Vehiculos en Taller</a>
+                <a href="{{ route('assign.index') }}" class="text-lg font-medium text-gray-300 hover:text-white">Vehiculo Asignado</a>
             </nav>
         </div>
     </div>

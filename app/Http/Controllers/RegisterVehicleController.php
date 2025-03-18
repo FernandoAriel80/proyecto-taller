@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterVehicleStoreUpdateRequest;
+use App\Models\AssignedEmployee;
 use App\Models\Reservation;
 use App\Models\VehicleInWorkshop;
 use Illuminate\Http\Request;
@@ -28,7 +29,23 @@ class RegisterVehicleController extends Controller
         $query->orderByDesc("id");
         $in_workshops = $query->paginate(5);
 
-        return view("admin.registerVehicle.index", compact('in_workshops', 'search'));
+        // 
+        /* $query_assign = AssignedEmployee::query();
+        $search_assign = $request->input('search_assign', '');
+
+        if (!empty($search_assign)) {
+            $query_assign->where(function ($q) use ($search_assign) {
+                $q->where('name', 'LIKE', "%$search_assign%")
+                    ->orWhere('email', 'LIKE', "%$search_assign%")
+                    ->orWhere('license_plate', 'LIKE', "%$search_assign%");
+            });
+        }
+        $query_assign->orderByDesc("id");
+        $in_workshops = $query_assign->paginate(5); */
+
+        $assigned_employees = AssignedEmployee::with(['user:id,name,email,dni,phone_number,role','vehicleInWorkshop'])->orderByDesc('id')->get();
+
+        return view("admin.registerVehicle.index", compact('in_workshops','assigned_employees', 'search'));
     }
 
     /**

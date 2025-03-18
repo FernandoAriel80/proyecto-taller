@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AssignedEmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FollowUpController;
@@ -47,6 +48,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/actualizar-vehiculo-en-taller/{id}',[RegisterVehicleController::class, 'edit'])->name('register.vehicle.edit');
         Route::put('/actualizar-vehiculo-en-taller/{id}',[RegisterVehicleController::class, 'update'])->name('register.vehicle.update');
         Route::put('/dar-de-alta-vehiculo-en-taller/{id}',[RegisterVehicleController::class,'releaseVehicle']);
+
+        Route::get('/ver-empleado-asignado',[AssignedEmployeeController::class, 'index'])->name('assign.index');
+        Route::post('/asignar-empleado',[AssignedEmployeeController::class,'store'])->name('assign.store');
 
     });
 

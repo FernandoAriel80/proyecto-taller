@@ -20,4 +20,8 @@ class VehicleInWorkshop extends Model
         'check_in_date',
         'check_out_date',
     ];
+
+    public function assignedEmployee(){
+        return $this->hasMany(AssignedEmployee::class);
+    }
 }
