@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="px-4 bg-slate-700">
+    <div class="px-4 bg-slate-700 h-screen w-screen">
         <div class="flax items-center content-center mx-20">
             <div class="py-5">
                 @if (session('success'))
