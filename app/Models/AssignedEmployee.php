@@ -23,6 +23,6 @@ class AssignedEmployee extends Model
     }
     public function vehicleInWorkshop()
     {
-        return $this->belongsTo(VehicleInWorkshop::class);
+        return $this->belongsTo(VehicleInWorkshop::class, 'vehicle_in_workshop_id');
     }
 }

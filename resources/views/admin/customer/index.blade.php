@@ -1,16 +1,22 @@
 <x-app-layout>
-    <div class="px-4 bg-slate-700 h-screen w-screen">
-        <div class="flax items-center content-center mx-20">
-            <div class="py-5">
-                <h1 class="text-center text-3xl font-bold mb-4 text-gray-200">Clientes</h1>
-                <div>
-                    <form action="{{ route('customer.index') }}" method="GET">
-                        {{-- @csrf --}}
-                        <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
-                            placeholder="Buscar">
-                        <button type="submit" class="p-2 bg-red-600 hover:bg-red-700 rounded-md ">Buscar</button>
-                    </form>
-                </div>
+    <div class="grid grid-cols-8 h-screen">
+        <!-- Sidebar -->
+        <div class="col-span-1">
+            <x-menu-admin></x-menu-admin>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-span-7 bg-slate-700 p-6">
+            <div class="flex flex-col mx-auto max-w-6xl">
+                <h1 class="text-center text-3xl font-bold mb-6 text-gray-200">Clientes</h1>
+
+                <form action="{{ route('customer.index') }}" method="GET" class="mb-4 flex justify-end gap-x-4">
+                    <input type="search" class="rounded-md p-2 w-64" name="search" value="{{ request('search') }}"
+                        placeholder="Buscar...">
+                    <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-md text-white">
+                        Buscar
+                    </button>
+                </form>
 
                 @if ($customers->count())
                     <section class="p-4">
@@ -47,16 +53,13 @@
                             </table>
                         </div>
                     </section>
-                    <section>
-                        <!-- Paginación -->
-                        <div class="mt-4">
-                            {{ $customers->appends(['search' => request('search')])->links() }}
-                        </div>
-                    </section>
+
+                    <div class="mt-4">
+                        {{ $customers->appends(['search' => request('search')])->links() }}
+                    </div>
                 @else
                     <p class="text-gray-500 mt-4">No se encontraron clientes.</p>
                 @endif
-
             </div>
         </div>
     </div>

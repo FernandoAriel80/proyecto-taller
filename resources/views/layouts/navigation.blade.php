@@ -39,7 +39,7 @@
                         </x-dropdown-link>
 
                         @if (Auth::user()->role === 'admin')
-                            <x-dropdown-link :href="route('admin.menu')">
+                            <x-dropdown-link :href="route('customer.index')">
                                 {{ __('Administracion') }}
                             </x-dropdown-link>
                         @endif

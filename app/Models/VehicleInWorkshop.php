@@ -21,7 +21,8 @@ class VehicleInWorkshop extends Model
         'check_out_date',
     ];
 
-    public function assignedEmployee(){
-        return $this->hasMany(AssignedEmployee::class);
+    public function assignedEmployees()
+    {
+        return $this->hasMany(AssignedEmployee::class, 'vehicle_in_workshop_id');
     }
 }
