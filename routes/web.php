@@ -4,7 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssignedEmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeNoteController;
+use App\Http\Controllers\EmployeeReportController;
 use App\Http\Controllers\FollowUpController;
+use App\Http\Controllers\GeneralDataController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterVehicleController;
 use App\Http\Controllers\ReservationController;
@@ -48,6 +51,15 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/ver-empleado-asignado',[AssignedEmployeeController::class, 'index'])->name('assign.index');
         Route::post('/asignar-empleado',[AssignedEmployeeController::class,'store'])->name('assign.store');
+
+        //admin.workshop
+
+        Route::get('/ver-datos-generales-empelado',[GeneralDataController::class, 'index'])->name('workshop.general.data.index');
+
+        Route::get('/ver-reportes-del-empleado',[EmployeeReportController::class, 'index'])->name('workshop.employee.report.index');
+        Route::post('/crear-reporte-empleado',[EmployeeReportController::class,'store'])->name('workshop.employee.report.store');
+
+        Route::get('/ver-notas-del-empelado',[EmployeeNoteController::class, 'index'])->name('workshop.employee.note.index');
 
     });
 

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AssignedEmployee extends Model
 {
-    use HasFactory;
     protected $fillable = [
         'user_id',
         'vehicle_in_workshop_id'
@@ -24,5 +23,9 @@ class AssignedEmployee extends Model
     public function vehicleInWorkshop()
     {
         return $this->belongsTo(VehicleInWorkshop::class, 'vehicle_in_workshop_id');
+    }
+    public function employeeReport()
+    {
+        return $this->belongsTo(EmployeeReport::class);
     }
 }
