@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class MenuAdmin extends Component
+class MenuWorkshop extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class MenuAdmin extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.menu-admin');
+        return view('components.admin.workshop.menu-workshop');
     }
 }

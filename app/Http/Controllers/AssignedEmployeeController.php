@@ -16,9 +16,7 @@ class AssignedEmployeeController extends Controller
     {
         try {
             $assigned_employee = AssignedEmployee::with(['vehicleInWorkshop'])->orderByDesc('id')->where('user_id','=',Auth::user()->id)->first();
-
-           // dd($assigned_employee);
-            return view('admin.workshop.index',compact(['assigned_employee']));
+            return view('admin.workshop.general-data',compact(['assigned_employee']));
         } catch (\Throwable $th) {
             throw $th;
         }
