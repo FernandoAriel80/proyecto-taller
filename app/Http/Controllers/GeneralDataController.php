@@ -12,11 +12,11 @@ class GeneralDataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         try {
-            $assigned_employee = AssignedEmployee::with(['vehicleInWorkshop'])->orderByDesc('id')->where('user_id','=',Auth::user()->id)->first();
-            return view('admin.workshop.general-data',compact(['assigned_employee']));
+            $assigned_employee = AssignedEmployee::with(['vehicleInWorkshop'])->orderByDesc('id')->findOrFail($id)->get();
+            return view('admin.workshop.assignedVehicle.general-data',compact(['assigned_employee']));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -43,7 +43,12 @@ class GeneralDataController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $assigned_employee = AssignedEmployee::with(['vehicleInWorkshop'])->orderByDesc('id')->findOrFail($id);
+            return view('admin.workshop.assignedVehicle.general-data',compact(['assigned_employee']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -1,6 +1,5 @@
-<x-admin.workshop.workshop-template sub_title="Reporte del Empleado">
+<x-admin.workshop.assignedVehicle.workshop-template sub_title="Reporte del Empleado" :current_id="$id">
 
-    {{ dd($report) }}
     <div class="grid gap-1">
         <section>
             <x-open-modal-button anyFunction="openModal">
@@ -17,6 +16,7 @@
             </div>
             <form action="{{ route('workshop.employee.report.store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="current_id" value={{ $id }} />
                 <x-input-textarea name="message_report" label="Escriba su reporte" />
                 <x-submit-button-modal>Guardar</x-submit-button-modal>
             </form>
@@ -31,7 +31,7 @@
 
     </div>
 
-</x-admin.workshop.workshop-template>
+</x-admin.workshop.assignedVehicle.workshop-template>
 
 <script>
     function openModal() {

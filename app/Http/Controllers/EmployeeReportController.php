@@ -14,12 +14,12 @@ class EmployeeReportController extends Controller
      */
     public function index()
     {
-        try {
+       /*  try {
             $report = AssignedEmployee::with(['employeeReport'])->orderByDesc('id')->where('user_id','=',Auth::user()->id)->first();
             return view('admin.workshop.employee-report',compact(['report']));
         } catch (\Throwable $th) {
             throw $th;
-        }
+        } */
     }
 
     /**
@@ -35,7 +35,9 @@ class EmployeeReportController extends Controller
      */
     public function store(Request $request)
     {
-        DD($request->message_report);
+        $id = $request->input("current_id");
+        dd($id);
+        //DD($request->message_report);
     }
 
     /**
@@ -43,7 +45,12 @@ class EmployeeReportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $report = AssignedEmployee::with(['employeeReport'])->orderByDesc('id')->where('vehicle_in_workshop_id','=',$id)->first();
+            return view('admin.workshop.assignedVehicle.employee-report',compact(['report', 'id']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

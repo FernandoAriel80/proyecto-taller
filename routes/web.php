@@ -54,12 +54,12 @@ Route::middleware('auth')->group(function () {
 
         //admin.workshop
 
-        Route::get('/ver-datos-generales-empelado',[GeneralDataController::class, 'index'])->name('workshop.general.data.index');
+        Route::get('/ver-datos-generales-empelado/{id}',[GeneralDataController::class, 'show'])->name('workshop.general.data.show');
 
-        Route::get('/ver-reportes-del-empleado',[EmployeeReportController::class, 'index'])->name('workshop.employee.report.index');
+        Route::get('/ver-reportes-del-empleado/{id}',[EmployeeReportController::class, 'show'])->name('workshop.employee.report.show');
         Route::post('/crear-reporte-empleado',[EmployeeReportController::class,'store'])->name('workshop.employee.report.store');
 
-        Route::get('/ver-notas-del-empelado',[EmployeeNoteController::class, 'index'])->name('workshop.employee.note.index');
+        Route::get('/ver-notas-del-empelado/{id}',[EmployeeNoteController::class, 'show'])->name('workshop.employee.note.show');
 
     });
 
