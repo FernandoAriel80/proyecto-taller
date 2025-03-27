@@ -29,23 +29,9 @@ class RegisterVehicleController extends Controller
         $query->orderByDesc("id");
         $in_workshops = $query->paginate(5);
 
-        // 
-        /* $query_assign = AssignedEmployee::query();
-        $search_assign = $request->input('search_assign', '');
+        //$assigned_employees = AssignedEmployee::with(['user:id,name,email,dni,phone_number,role','vehicleInWorkshop'])->orderByDesc('id')->get();
 
-        if (!empty($search_assign)) {
-            $query_assign->where(function ($q) use ($search_assign) {
-                $q->where('name', 'LIKE', "%$search_assign%")
-                    ->orWhere('email', 'LIKE', "%$search_assign%")
-                    ->orWhere('license_plate', 'LIKE', "%$search_assign%");
-            });
-        }
-        $query_assign->orderByDesc("id");
-        $in_workshops = $query_assign->paginate(5); */
-
-        $assigned_employees = AssignedEmployee::with(['user:id,name,email,dni,phone_number,role','vehicleInWorkshop'])->orderByDesc('id')->get();
-
-        return view("admin.registerVehicle.index", compact('in_workshops','assigned_employees', 'search'));
+        return view("admin.registerVehicle.index", compact('in_workshops', 'search'));
     }
 
     /**

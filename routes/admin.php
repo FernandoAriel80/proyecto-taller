@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/reservas-de-usuarios-conformado/{id}',[AdminController::class, 'confirmed'])->name('reservations.confirmed');
         Route::put('/reservas-de-usuarios-rechazado/{id}',[AdminController::class, 'decline'])->name('reservations.decline');
 
+        Route::get('/ver-enpleados-asignados',[AssignedEmployeeController::class, 'assignedEmployee'])->name('assigned.employees');
+
         Route::get('/ver-vehiculo-en-taller',[RegisterVehicleController::class, 'index'])->name('register.vehicle.index');
         Route::get('/registrar-vehiculo-en-taller/{id}',[RegisterVehicleController::class, 'create'])->name('register.vehicle.create');
         Route::post('/registrar-vehiculo-en-taller',[RegisterVehicleController::class, 'store'])->name('register.vehicle.store');
@@ -36,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/ver-empleado-asignado',[AssignedEmployeeController::class, 'index'])->name('assign.index');
         Route::post('/asignar-empleado/{id}',[AssignedEmployeeController::class,'store'])->name('assign.store');
+        Route::put('/dar-de-alta-vehiculo-desde-taller/{id}',[AssignedEmployeeController::class,'releaseVehicle']);
 
         //admin.workshop
 

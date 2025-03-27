@@ -40,7 +40,7 @@ class AdminController extends Controller
             }
         }
         $query->orderByDesc("id");
-        $reservations = $query->paginate(1);
+        $reservations = $query->paginate(5);
         return view('admin.reservations.index', compact('reservations', 'search'));
     }
 

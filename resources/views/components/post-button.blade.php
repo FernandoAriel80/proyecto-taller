@@ -1,9 +1,9 @@
-@props(['current_color'=> 'green','method','route','current_id'])
+@props(['name' => '','current_color'=> 'green','method','route','current_id' =>''])
 @php
-    $color = "bg-{$current_color}-500 hover:bg-{$current_color}-700";
+    $color = "bg-".$current_color."-500 hover:bg-".$current_color."-700";
 @endphp
 
-<form method="POST" action="{{ route($route,$current_id) }}">
+<form id={{ $name  }} name={{ $name  }} method="POST" action="{{ route($route,$current_id) }}">
     @csrf
     @method($method)
     <button type="submit"

@@ -28,27 +28,29 @@
                                     Fecha no disponible
                                 @endif
                             </td>
-                            <td>
+                            <td class="flex p-2">
                                 <x-color-button>
                                     <a href="{{ route('employee.edit', [$employee->id]) }}">Actualizar</a>
                                 </x-color-button>
 
                                 <!-- Botón de Eliminar -->
-                                <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
-                                    class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="m-1 flex-1 md:max-w-20 md:max-h-10 min-w-20 min-h-10 rounded-md text-white bg-red-500 hover:bg-red-600"
-                                        onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
-                                        Eliminar
-                                    </button>
-                                </form>
+
+                                <x-open-modal-button anyFunction="openConfirmModal" current_id="{{ $employee->id }}"
+                                    current_color="red">
+                                    Eliminar
+                                </x-open-modal-button>
+
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        @include('admin.components.delete-modal', [
+            'message' => 'Vas a eliminar a un empleado, esta acción no se puede deshacer.',
+            'method' => 'DELETE',
+        ])
+
     </section>
     <section>
         <!-- Paginación -->
@@ -59,3 +61,9 @@
 @else
     <p class="text-gray-500 mt-4">No se encontraron empleados.</p>
 @endif
+<script>
+    function openConfirmModal(productId) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteForm').action = `/eliminar-empleados/${productId}`;
+    }
+</script>

@@ -1,18 +1,25 @@
 <x-admin.admin-template title="Registrar Vehiculo">
     <div>
-        <section>
-            <div class="flex justify-end">
-                <x-search-button text="Buscar" route="register.vehicle.index"  placeholder="Buscar..." />
-            </div>
-        </section>
+        <div class="flex justify-between">
+            <section>
+                <x-color-button>
+                    <a href="{{ route('assigned.employees') }}">Ver empleados asignados</a>
+                </x-color-button>
+            </section>
+            <section>
+                <x-search-button text="Buscar" route="register.vehicle.index" placeholder="Buscar..." />
+            </section>
+        </div>
 
         <!-- Modal (oculto por defecto) -->
-        @include('admin.registerVehicle.components.delete-modal')
+        @include('admin.components.delete-modal', [
+            'message' => 'Vas a dar de alta este vehiculo, esta acción no se puede deshacer.',
+            'method' => 'PUT',
+        ])
+
 
 
         <!-- Tabla de Reservas -->
         @include('admin.registerVehicle.components.reservation-table')
     </div>
-    <!-- tabla de empelado asignado -->
-    @include('admin.registerVehicle.components.assigned-table')
 </x-admin.admin-template>
