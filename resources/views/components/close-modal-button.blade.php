@@ -1,2 +1,2 @@
-@props(['anyFunction'])
-<button class="p-2 rounded-md bg-red-600 hover:bg-red-700 text-white" onclick="{{ $anyFunction }}()">{{ $slot }}</button>
+@props(['anyFunction','current_id'=>''])
+<button onclick="{{ $anyFunction }}({{ $current_id }})" class="m-1 flex-1 md:max-w-20 md:max-h-10 min-w-20 min-h-10 rounded-md text-white bg-red-500 hover:bg-red-600">{{ $slot }}</button>

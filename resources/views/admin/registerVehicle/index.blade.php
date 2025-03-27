@@ -2,12 +2,7 @@
     <div>
         <section>
             <div class="flex justify-end">
-                <form action="{{ route('register.vehicle.index') }}" method="GET">
-                    <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
-                        placeholder="Buscar">
-                    <button type="submit"
-                        class="p-2 bg-red-600 hover:bg-red-700 rounded-md text-white ">Buscar</button>
-                </form>
+                <x-search-button text="Buscar" route="register.vehicle.index"  placeholder="Buscar..." />
             </div>
         </section>
 

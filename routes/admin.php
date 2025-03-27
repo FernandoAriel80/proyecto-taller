@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/dar-de-alta-vehiculo-en-taller/{id}',[RegisterVehicleController::class,'releaseVehicle']);
 
         Route::get('/ver-empleado-asignado',[AssignedEmployeeController::class, 'index'])->name('assign.index');
-        Route::post('/asignar-empleado',[AssignedEmployeeController::class,'store'])->name('assign.store');
+        Route::post('/asignar-empleado/{id}',[AssignedEmployeeController::class,'store'])->name('assign.store');
 
         //admin.workshop
 

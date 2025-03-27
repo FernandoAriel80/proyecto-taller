@@ -4,12 +4,12 @@
             <h1 class="text-xl font-bold mb-4 text-gray-200 text-center">Actualizar Vehiculo en Taller</h1>
 
             <section>
-                <div class="px-20">
+                <div class="md:px-20">
                     <form action="{{ route('register.vehicle.update',$in_workshop->id) }}" method="POST">
                         @csrf
                         @method("PUT")
-                        <div class=" grid md:grid-cols-3 gap-4 grid-cols-1 ">
-                            <div class="">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+                            <div class=" w-full">
                                 <h3 class="text-center text-white">Datos de Cliente</h3>
                                 <x-input-modal name="name" type="text" value="{{ $in_workshop->name }}"
                                     placeholder="Nombre" required />
@@ -32,14 +32,16 @@
                                     placeholder="Año de Fabricacion" required />
                             </div>
                             <div>
-                                <h3 class="text-white text-center">Detalles de la Falla</h3>
-                                <textarea name="description" class="text-left text-black bg-gray-300 h-3/4 w-full p-2">
+                                <x-input-textarea name="description" label="Detalles de la Falla">
                                     {{ $in_workshop->description }}
-                                </textarea>
+                                </x-input-textarea>
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"> Actualizar
-                        </button>
+                        <div class="flex">
+                            <x-color-button type="submit" current_color="green">
+                                Actualizar
+                            </x-color-button>
+                        </div>
                     </form>
                 </div>
             </section>

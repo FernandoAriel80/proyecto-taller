@@ -8,18 +8,12 @@
         <div class="grid grid-rows-1 grid-cols-1 md:grid-cols-3 gap-2 p-2">
             <div>
                 <!-- Botón para abrir el modal -->
-                <button onclick="openCreateModal()"
-                    class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-xl transition">
+                <x-open-modal-button anyFunction="openCreateModal">
                     Crear Empleado
-                </button>
+                </x-open-modal-button>
             </div>
             <div class="md:col-start-3">
-                <form action="{{ route('employee.index') }}" method="GET">
-                    {{-- @csrf --}}
-                    <input type="search" class="rounded-md" name="search" value="{{ request('search') }}"
-                        placeholder="Buscar">
-                    <button type="submit" class="p-2 bg-red-600 hover:bg-red-700 rounded-md ">Buscar</button>
-                </form>
+                <x-search-button text="Buscar" route="employee.index"  placeholder="Buscar..."/>
             </div>
         </div>
 
@@ -27,7 +21,7 @@
         <section>
             @include('admin.employee.components.create-modal')
         </section>
-        <!-- End ModalCreate -->
+        <!-- table -->
         @include('admin.employee.components.employee-table')
 
     </div>

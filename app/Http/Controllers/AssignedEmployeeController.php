@@ -33,12 +33,13 @@ class AssignedEmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
+        dd($id);
         try {
             AssignedEmployee::create([
                 'user_id' => $request->user()->id,
-                'vehicle_in_workshop_id' => $request->vehicle_in_workshop_id,
+                'vehicle_in_workshop_id' => $id,
             ]);
 
             return redirect()->route('assign.index');

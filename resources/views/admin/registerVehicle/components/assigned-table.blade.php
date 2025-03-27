@@ -10,7 +10,7 @@
                             <th class="px-4 py-2 text-left">Nombre Empleado</th>
                             <th class="px-4 py-2 text-left">Detalles Empleado</th>
                             <th class="px-4 py-2 text-left">Patente del Auto</th>
-                            <th class="px-4 py-2 text-left">Detalles Vehiculo</th>
+                            <th class="px-4 py-2 text-left">Detalles Cliente</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,100 +19,94 @@
                                 <td class="px-4 py-2">{{ $assigned_employee->id }}</td>
                                 <td class="px-4 py-2">{{ $assigned_employee->user->name }}</td>
                                 <td>
-                                    <button onclick="openDescriptionEmployeeModal({{ $assigned_employee->id }})"
-                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                    <x-open-modal-button anyFunction="openDescriptionEmployeeModal"
+                                        current_id="{{ $assigned_employee->id }}">
                                         Descripción
-                                    </button>
+                                    </x-open-modal-button>
                                     <section>
-                                        <div id="modalDescriptionEmployee{{ $assigned_employee->id }}"
-                                            class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-                                            <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-4xl">
-                                                <div>
-                                                    <button
-                                                        onclick="claseDescriptionEmployeeModal({{ $assigned_employee->id }})"
-                                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                        Cerrar
-                                                    </button>
-                                                    <h4 class="text-2xl text-center font-semibold text-gray-800">
+                                        <x-details-modal id="modalDescriptionEmployee{{ $assigned_employee->id }}">
+                                            <div>
+                                                <x-close-modal-button anyFunction="claseDescriptionEmployeeModal"
+                                                    current_id="{{ $assigned_employee->id }}">
+                                                    Cerrar
+                                                </x-close-modal-button>
+                                                <div class="bg-slate-500">
+                                                    <h4 class="text-2xl text-center font-semibold text-white">
                                                         Detalles Empleado
                                                     </h4>
-                                                    <div class="grid grid-cols-1 md:grid-cols-3 ">
-                                                        <label>Nombre: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->user->name }}</p>
-                                                        </label>
-                                                        <label>Correo: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->user->email }}</p>
-                                                        </label>
-                                                        <label>Numero de celular: <p
-                                                                class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->user->phone_number }}
-                                                            </p> </label>
-                                                        <label>DNI: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->user->dni }}</p>
-                                                        </label>
-                                                        <label>Rol: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->user->role }}</p>
-                                                        </label>
-                                                    </div>
+                                                </div>
+                                                <div class="grid grid-cols-1 md:grid-cols-3 ">
+                                                    <label>Nombre: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->user->name }}</p>
+                                                    </label>
+                                                    <label>Correo: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->user->email }}</p>
+                                                    </label>
+                                                    <label>Numero de celular: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->user->phone_number }}
+                                                        </p> </label>
+                                                    <label>DNI: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->user->dni }}</p>
+                                                    </label>
+                                                    <label>Rol: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->user->role }}</p>
+                                                    </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </x-details-modal>
                                     </section>
                                 </td>
                                 <td class="px-4 py-2">
                                     {{ $assigned_employee->vehicleInWorkshop->license_plate }}</td>
                                 <td>
-                                    <button onclick="openDescriptionVehicleModal({{ $assigned_employee->id }})"
-                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                    <x-open-modal-button anyFunction="openDescriptionVehicleModal"
+                                        current_id="{{ $assigned_employee->id }}">
                                         Descripción
-                                    </button>
+                                    </x-open-modal-button>
                                     <section>
-                                        <div id="modalDescriptionVehicle{{ $assigned_employee->id }}"
-                                            class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-                                            <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-4xl">
-                                                <div>
-                                                    <button
-                                                        onclick="claseDescriptionVehicleModal({{ $assigned_employee->id }})"
-                                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                        Cerrar
-                                                    </button>
-                                                    <h4 class="text-2xl text-center font-semibold text-gray-800">
+                                        <x-details-modal id="modalDescriptionVehicle{{ $assigned_employee->id }}">
+                                            <div>
+                                                <x-close-modal-button anyFunction="claseDescriptionVehicleModal"
+                                                    current_id="{{ $assigned_employee->id }}">
+                                                    Cerrar
+                                                </x-close-modal-button>
+                                                <div class="bg-slate-500">
+                                                    <h4 class="text-2xl text-center font-semibold text-white">
                                                         Detalles Cliente
                                                     </h4>
-                                                    <div class="grid grid-cols-1 md:grid-cols-3 ">
-                                                        <label>Nombre: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->name }}
-                                                            </p>
-                                                        </label>
-                                                        <label>Correo: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->email }}
-                                                            </p> </label>
-                                                        <label>Numero de celular: <p
-                                                                class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->phone_number }}
-                                                            </p> </label>
-                                                        <label>Vehiculo: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->vehicle_type }}
-                                                            </p></label>
-                                                        <label>Patente: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->license_plate }}
-                                                            </p></label>
-                                                        <label>Marca: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->brand }}
-                                                            </p></label>
-                                                        <label>Año: <p class="font-semibold text-gray-800">
-                                                                {{ $assigned_employee->vehicleInWorkshop->year }}
-                                                            </p></label>
-
-                                                    </div>
-
-                                                    <label>Descripción:</label>
-                                                    <p class="font-semibold text-gray-800">
-                                                        {{ $assigned_employee->vehicleInWorkshop->description }}
-                                                    </p>
                                                 </div>
+                                                <div class="grid grid-cols-1 md:grid-cols-3 ">
+                                                    <label>Nombre: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->name }}
+                                                        </p>
+                                                    </label>
+                                                    <label>Correo: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->email }}
+                                                        </p> </label>
+                                                    <label>Numero de celular: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->phone_number }}
+                                                        </p> </label>
+                                                    <label>Vehiculo: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->vehicle_type }}
+                                                        </p></label>
+                                                    <label>Patente: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->license_plate }}
+                                                        </p></label>
+                                                    <label>Marca: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->brand }}
+                                                        </p></label>
+                                                    <label>Año: <p class="font-semibold text-gray-800">
+                                                            {{ $assigned_employee->vehicleInWorkshop->year }}
+                                                        </p></label>
+
+                                                </div>
+
+                                                <label>Descripción:</label>
+                                                <p class="font-semibold text-gray-800">
+                                                    {{ $assigned_employee->vehicleInWorkshop->description }}
+                                                </p>
                                             </div>
-                                        </div>
+                                        </x-details-modal>
                                     </section>
                                 </td>
                             </tr>
@@ -145,5 +139,4 @@
     function claseDescriptionVehicleModal(id) {
         document.getElementById('modalDescriptionVehicle' + id).classList.add('hidden');
     }
-
 </script>

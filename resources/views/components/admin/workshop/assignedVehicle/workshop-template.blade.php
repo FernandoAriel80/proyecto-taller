@@ -2,7 +2,7 @@
 
 <x-admin.admin-template title="EN EL TALLER">
     <div>
-        {{-- menu menu del workshop --}}
+        <!-- menu menu del workshop -->
         @include('admin.workshop.assignedVehicle.components.menu-workshop',['current_id'  => $current_id])
         <h4 class="text-xl font-bold mb-4 text-gray-200">{{ $sub_title }}</h4>
         <section>

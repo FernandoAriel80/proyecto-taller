@@ -31,14 +31,16 @@
                                     placeholder="Año de Fabricacion" required />
                             </div>
                             <div>
-                                <h3 class="text-white text-center">Detalles de la Falla</h3>
-                                <textarea name="description" class="text-left text-black bg-gray-300 h-3/4 w-full p-2">
+                                <x-input-textarea name="description" label="Detalles de la Falla">
                                     {{ $reservation->description }}
-                                </textarea>
+                                </x-input-textarea>
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 p-2 rounded-md text-white"> Guardar
-                        </button>
+                        <div class="flex">
+                            <x-color-button type="submit" current_color="green">
+                                Guardar
+                            </x-color-button>
+                        </div>
                     </form>
                 </div>
             </section>

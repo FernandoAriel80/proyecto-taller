@@ -20,49 +20,48 @@
                             <td class="px-4 py-2">{{ $in_workshop->name }}</td>
                             <td class="px-4 py-2">{{ $in_workshop->license_plate }}</td>
                             <td>
-                                <button onclick="openDescriptionModal({{ $in_workshop->id }})"
-                                    class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                <x-open-modal-button anyFunction="openDescriptionModal"
+                                    current_id="{{ $in_workshop->id }}">
                                     Descripción
-                                </button>
+                                </x-open-modal-button>
 
                                 <section>
-                                    <div id="modalDescription{{ $in_workshop->id }}"
-                                        class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-                                        <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-4xl">
-                                            <div>
-                                                <button onclick="claseDescriptionModal({{ $in_workshop->id }})"
-                                                    class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                    Cerrar
-                                                </button>
-                                                <h4 class="text-2xl text-center font-semibold text-gray-800">
+                                    <x-details-modal id="modalDescription{{ $in_workshop->id }}">
+                                        <div>
+                                            <x-close-modal-button anyFunction="claseDescriptionModal"
+                                                current_id="{{ $in_workshop->id }}">
+                                                Cerrar
+                                            </x-close-modal-button>
+                                            <div class="bg-slate-500">
+                                                <h4 class="text-2xl text-center font-semibold text-white">
                                                     Detalles
                                                 </h4>
-                                                <div class="grid grid-cols-1 md:grid-cols-3 ">
-                                                    <label>Correo: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->email }}</p> </label>
-                                                    <label>Numero de celular: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->phone_number }}</p>
-                                                    </label>
-                                                    <label>Vehiculo: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->vehicle_type }}</p>
-                                                    </label>
-                                                    <label>Patente: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->license_plate }}</p>
-                                                    </label>
-                                                    <label>Marca: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->brand }}</p></label>
-                                                    <label>Año: <p class="font-semibold text-gray-800">
-                                                            {{ $in_workshop->year }}</p></label>
-
-                                                </div>
-
-                                                <label>Descripción:</label>
-                                                <p class="font-semibold text-gray-800">
-                                                    {{ $in_workshop->description }}
-                                                </p>
                                             </div>
+                                            <div class="grid grid-cols-1 md:grid-cols-3 ">
+                                                <label>Correo: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->email }}</p> </label>
+                                                <label>Numero de celular: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->phone_number }}</p>
+                                                </label>
+                                                <label>Vehiculo: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->vehicle_type }}</p>
+                                                </label>
+                                                <label>Patente: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->license_plate }}</p>
+                                                </label>
+                                                <label>Marca: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->brand }}</p></label>
+                                                <label>Año: <p class="font-semibold text-gray-800">
+                                                        {{ $in_workshop->year }}</p></label>
+
+                                            </div>
+
+                                            <label>Descripción:</label>
+                                            <p class="font-semibold text-gray-800">
+                                                {{ $in_workshop->description }}
+                                            </p>
                                         </div>
-                                    </div>
+                                    </x-details-modal>
                                 </section>
 
                             </td>
@@ -72,30 +71,25 @@
                             <td class="px-4 py-2">
                                 {{ $in_workshop->check_out_date != null ? \Carbon\Carbon::parse($in_workshop->check_out_date)->format('d-m-Y') : 'No hay fecha' }}
                             </td>
-                            <td class="flex mt-1">
-                                {{--  --}}
-                                <button class="p-1 mx-2 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                            <td class="grid grid-rows-2 md:flex mt-1">
+                                <!-- Botón para actualizar -->
+                                <x-color-button>
                                     <a href="{{ route('register.vehicle.edit', $in_workshop->id) }}">Actualizar</a>
-                                </button>
+                                </x-color-button>
                                 <!-- Botón para eliminar -->
 
                                 @if ($in_workshop->check_out_date == null)
-                                    <button onclick="openConfirmModal({{ $in_workshop->id }})"
-                                        class="p-1 mx-2 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                    <x-open-modal-button anyFunction="openConfirmModal"
+                                        current_id="{{ $in_workshop->id }}" current_color="green">
                                         Dar de alta
-                                    </button>
+                                    </x-open-modal-button>
                                 @endif
                                 {{-- asignar empleado --}}
-                                <div class="">
-                                    <form method="POST" action="{{ route('assign.store') }}">
-                                        @csrf
-                                        <input type="hidden" name="vehicle_in_workshop_id"
-                                            value="{{ $in_workshop->id }}">
-                                        <button type="submit"
-                                            class="p-1 mx-2 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                            Tomar Pedido
-                                        </button>
-                                    </form>
+                                <div>
+                                    <x-post-button route="assign.store" method="POST" name="vehicle_in_workshop_id"
+                                        current_id="{{ $in_workshop->id }}" current_color="red">
+                                        Tomar Pedido
+                                    </x-post-button>
                                 </div>
                             </td>
                         </tr>

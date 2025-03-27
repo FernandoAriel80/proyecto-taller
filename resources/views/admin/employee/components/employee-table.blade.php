@@ -29,16 +29,16 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="p-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md">
+                                <x-color-button>
                                     <a href="{{ route('employee.edit', [$employee->id]) }}">Actualizar</a>
-                                </button>
+                                </x-color-button>
 
                                 <!-- Botón de Eliminar -->
                                 <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
                                     class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md"
+                                    <button type="submit" class="m-1 flex-1 md:max-w-20 md:max-h-10 min-w-20 min-h-10 rounded-md text-white bg-red-500 hover:bg-red-600"
                                         onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
                                         Eliminar
                                     </button>

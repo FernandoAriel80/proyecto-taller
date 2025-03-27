@@ -24,49 +24,36 @@
                                 {{ \Carbon\Carbon::parse($reservation->date)->format('d-m-Y') }}</td>
                             <td class="px-4 py-2">
                                 <div class="flex space-x-2">
-                                    <button onclick="openUserModal()"
-                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                    <x-open-modal-button anyFunction="openUserModal">
                                         Ver Usuario
-                                    </button>
-                                    <button onclick="openVehiclesModal()"
-                                        class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                    </x-open-modal-button>
+                                    <x-open-modal-button anyFunction="openVehiclesModal">
                                         Ver Vehículo
-                                    </button>
+                                    </x-open-modal-button>
                                 </div>
                             </td>
                             @if ($reservation->is_confirmed == 0)
                                 <td class="px-4 py-2 text-red-700">No Confirmado</td>
                                 <td class="px-4 py-2">
                                     <div class="flex space-x-2">
-                                        <form action="{{ route('reservations.confirmed', $reservation->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit"
-                                                class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                Confirmar
-                                            </button>
-                                        </form>
+                                        <x-post-button current_color="green" method="PUT"
+                                            route="reservations.confirmed" current_id="{{ $reservation->id }}">
+                                            Confirmar
+                                        </x-post-button>
                                     </div>
                                 </td>
                             @else
                                 <td class="px-4 py-2 text-green-700">Confirmado</td>
                                 <td class="px-4 py-2">
                                     <div class="flex space-x-2">
-                                        <form action="{{ route('reservations.decline', $reservation->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit"
-                                                class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
-                                                Rechazar
-                                            </button>
-                                        </form>
+                                        <x-post-button current_color="red" method="PUT" route="reservations.decline"
+                                            current_id="{{ $reservation->id }}">
+                                            Rechazar
+                                        </x-post-button>
                                         <a href="{{ route('register.vehicle.create', $reservation->id) }}">
-                                            <button type="submit"
-                                                class="p-1 bg-red-600 hover:bg-red-700 text-white rounded-md">
+                                            <x-color-button current_color="red">
                                                 Registrar en taller
-                                            </button>
+                                            </x-color-button>
                                         </a>
                                     </div>
                                 </td>
