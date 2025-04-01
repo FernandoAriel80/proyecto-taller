@@ -1,5 +1,5 @@
 <div id="modalCreate" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-    <div class="bg-gray-700 p-6 rounded-lg shadow-lg w-96">
+    <div class="bg-gray-600 p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-xl font-bold mb-4 text-gray-200 text-center">Crea Empleado</h2>
         <x-close-modal-button anyFunction="closeCreateModal">
             Cerrar

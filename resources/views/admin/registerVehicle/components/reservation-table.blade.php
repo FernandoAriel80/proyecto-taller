@@ -80,14 +80,14 @@
 
                                 @if ($in_workshop->check_out_date == null)
                                     <x-open-modal-button anyFunction="openConfirmModal"
-                                        current_id="{{ $in_workshop->id }}" current_color="green">
+                                        current_id="{{ $in_workshop->id }}">
                                         Dar de alta
                                     </x-open-modal-button>
                                 @endif
                                 {{-- asignar empleado --}}
                                 <div>
                                     <x-post-button route="assign.store" method="POST" name="vehicle_in_workshop_id"
-                                        current_id="{{ $in_workshop->id }}" current_color="red">
+                                        current_id="{{ $in_workshop->id }}" current_color="blue">
                                         Tomar Pedido
                                     </x-post-button>
                                 </div>

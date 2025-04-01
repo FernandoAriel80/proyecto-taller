@@ -26,6 +26,6 @@ class AssignedEmployee extends Model
     }
     public function employeeReport()
     {
-        return $this->belongsTo(EmployeeReport::class);
+        return $this->hasMany(EmployeeReport::class);
     }
 }

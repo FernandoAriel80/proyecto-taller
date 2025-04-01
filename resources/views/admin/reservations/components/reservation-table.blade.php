@@ -46,12 +46,12 @@
                                 <td class="px-4 py-2 text-green-700">Confirmado</td>
                                 <td class="px-4 py-2">
                                     <div class="flex space-x-2">
-                                        <x-post-button current_color="red" method="PUT" route="reservations.decline"
+                                        <x-post-button method="PUT" route="reservations.decline"
                                             current_id="{{ $reservation->id }}">
                                             Rechazar
                                         </x-post-button>
                                         <a href="{{ route('register.vehicle.create', $reservation->id) }}">
-                                            <x-color-button current_color="red">
+                                            <x-color-button>
                                                 Registrar en taller
                                             </x-color-button>
                                         </a>

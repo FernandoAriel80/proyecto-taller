@@ -29,14 +29,13 @@
                                 @endif
                             </td>
                             <td class="flex p-2">
-                                <x-color-button>
+                                <x-color-button  current_color="blue">
                                     <a href="{{ route('employee.edit', [$employee->id]) }}">Actualizar</a>
                                 </x-color-button>
 
                                 <!-- Botón de Eliminar -->
 
-                                <x-open-modal-button anyFunction="openConfirmModal" current_id="{{ $employee->id }}"
-                                    current_color="red">
+                                <x-open-modal-button anyFunction="openConfirmModal" current_id="{{ $employee->id }}">
                                     Eliminar
                                 </x-open-modal-button>
 
