@@ -10,7 +10,7 @@
                 href="{{ route('workshop.employee.report.show',$current_id) }}">Reporte</a>
         </div>
         <div>
-            <a class="flex w-full hover:bg-slate-400 p-1 rounded-sm justify-center" href="{{ route('workshop.employee.note.show',$current_id) }}">Notas</a>
+            <a class="flex w-full hover:bg-slate-400 p-1 rounded-sm justify-center" href="{{ route('workshop.employee.note.index',$current_id) }}">Notas</a>
         </div>
        {{--  <div>
             <a class="hover:bg-slate-400 p-1 rounded-sm" href="{{ route('register.vehicle.index') }}">Registrados</a>

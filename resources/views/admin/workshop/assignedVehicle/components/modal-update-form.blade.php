@@ -1,6 +1,6 @@
-<x-my-modal nameID="modalThings">
+<x-my-modal nameID="modalUpdate">
     <div class="">
-        <x-close-modal-button anyFunction="closeModal">
+        <x-close-modal-button anyFunction="closeModalUpdate">
             Cerrar
         </x-close-modal-button>
 

@@ -18,7 +18,7 @@
 
             <!-- Expanded Image -->
             <img id="expandedImg" src="{{ asset('storage/' . $src) }}" alt="{{ $alt }}"
-                class="max-w-6xl max-h-screen rounded-lg shadow-lg">
+                class="md:max-w-6xl md:max-h-screen rounded-lg shadow-lg">
         </div>
     </div>
 </div>

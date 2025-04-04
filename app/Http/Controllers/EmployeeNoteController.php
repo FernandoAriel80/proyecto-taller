@@ -11,9 +11,14 @@ class EmployeeNoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( string $id)
     {
-        return view('admin.workshop.assignedVehicle.employee-note');
+        try {
+            $notes = EmployeeNote::where('assigned_employee_id', '=', $id)->orderByDesc('id')->get();
+            return view('admin.workshop.assignedVehicle.employee-note', compact(['id', 'notes']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -65,7 +70,7 @@ class EmployeeNoteController extends Controller
                 'image_url' => $path,
             ]);
 
-            return redirect()->route('workshop.employee.note.show', compact(['id']));
+            return redirect()->route('workshop.employee.note.index', compact(['id']));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -76,12 +81,11 @@ class EmployeeNoteController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $notes = EmployeeNote::where('assigned_employee_id', '=', $id)->orderByDesc('id')->get();
-            return view('admin.workshop.assignedVehicle.employee-note', compact(['id', 'notes']));
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+       try {
+        //code...
+       } catch (\Throwable $th) {
+        //throw $th;
+       }
     }
 
     /**

@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/ver-reportes-del-empleado/{id}',[EmployeeReportController::class, 'show'])->name('workshop.employee.report.show');
         Route::post('/crear-reporte-empleado',[EmployeeReportController::class,'store'])->name('workshop.employee.report.store');
 
-        Route::get('/ver-notas-del-empelado/{id}',[EmployeeNoteController::class, 'show'])->name('workshop.employee.note.show');
+        Route::get('/ver-notas-del-empelado/{id}',[EmployeeNoteController::class, 'index'])->name('workshop.employee.note.index');
         Route::post('/crear-nota-del-empleado',[EmployeeNoteController::class, 'store'])->name('workshop.employee.note.store');
 
     });

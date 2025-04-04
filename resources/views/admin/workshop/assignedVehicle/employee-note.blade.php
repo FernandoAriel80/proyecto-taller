@@ -1,9 +1,9 @@
 <x-admin.workshop.assignedVehicle.workshop-template sub_title="Notas del Empleado" :current_id="$id">
     <div>
-        <x-open-modal-button anyFunction="openModal"> Crea nota</x-open-modal-button>
+        <x-open-modal-button anyFunction="openModalCreate"> Crea nota</x-open-modal-button>
     </div>
     <div>
-        @include('admin.workshop.assignedVehicle.components.modal-form')
+        @include('admin.workshop.assignedVehicle.components.modal-create-form')
     </div>
     <div class="grid gap-2">
         @if ($notes->count())
@@ -11,8 +11,8 @@
                 <div class="grid p-2 gap-1 rounded-md bg-slate-200 ">
                     <x-admin.workshop.assignedVehicle.card-note-image parag="{{ $note->description }}"
                         src="{{ $note->image_url }}" alt="Imagen" :id="$note->id"/>
-                    <div class="w-full text-end bg-slate-600">
-                        <x-color-button> Actualizar</x-color-button>
+                    <div class="w-full text-end bg-slate-800">
+                        <x-open-modal-button anyFunction="openModalUpdate" current_id="{{ $note->id }}"> Actualizar</x-open-modal-button>
                     </div>
                 </div>
             @endforeach
@@ -24,11 +24,19 @@
     </div>
 </x-admin.workshop.assignedVehicle.workshop-template>
 <script>
-    function openModal() {
-        document.getElementById("modalThings").classList.remove("hidden");
+    function openModalCreate() {
+        document.getElementById("modalCreate").classList.remove("hidden");
     }
 
-    function closeModal() {
-        document.getElementById("modalThings").classList.add("hidden");
+    function closeModalCreate() {
+        document.getElementById("modalCreate").classList.add("hidden");
+    }
+    function openModalUpdate(id) {
+       // document.getElementById("modalUpdate").classList.remove("hidden");
+       alert(id)
+    }
+
+    function closeModalUpdate() {
+        document.getElementById("modalUpdate").classList.add("hidden");
     }
 </script>

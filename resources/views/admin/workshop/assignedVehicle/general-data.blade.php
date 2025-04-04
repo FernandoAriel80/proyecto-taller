@@ -1,6 +1,6 @@
 <x-admin.workshop.assignedVehicle.workshop-template sub_title="Datos Generales" :current_id="$assigned_employee->id">
     <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-2">
-        <div class="grid grid-cols-2 rounded-md gap-2 p-1 row-span-1 bg-white ">
+        <div class="grid md:grid-cols-2 rounded-md gap-2 p-1 row-span-1 bg-white ">
             <section class="w-full max-w-full overflow-hidden">
                 <h4 class="flex font-bold mb-4 bg-slate-500 text-white p-1 rounded-tl rounded-tr">
                     Detalles del cliente:
