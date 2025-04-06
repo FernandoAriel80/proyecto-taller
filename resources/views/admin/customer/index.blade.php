@@ -1,4 +1,4 @@
-<x-admin.admin-template title="Clientes">
+<x-admin.admin-template title="Clientes" sidebar="admin.components.sidebar">
     <div>
         <div class="flex justify-end">
             <x-search-button text="Buscar" route="customer.index" placeholder="Buscar..." />

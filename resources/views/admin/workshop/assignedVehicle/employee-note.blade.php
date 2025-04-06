@@ -1,4 +1,4 @@
-<x-admin.workshop.assignedVehicle.workshop-template sub_title="Notas del Empleado" :current_id="$id">
+<x-admin.workshop.assignedVehicle.workshop-template sidebar="admin.components.sidebar" menu_workshop="admin.workshop.assignedVehicle.components.menu-workshop" sub_title="Notas del Empleado" :current_id="$id">
     <div>
         <x-open-modal-button anyFunction="openModalCreate"> Crea nota</x-open-modal-button>
     </div>

@@ -44,7 +44,7 @@
                             </x-dropdown-link>
                         @endif
 
-                        <x-dropdown-link :href="route('followUp.menu')">
+                        <x-dropdown-link :href="route('followUp.reservation')">
                             {{ __('Seguimiento') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
@@ -99,7 +99,7 @@
                         {{ __('Administracion') }}
                     </x-dropdown-link>
                 @endif
-                <x-dropdown-link :href="route('followUp.menu')">
+                <x-dropdown-link :href="route('followUp.reservation')">
                     {{ __('Seguimiento') }}
                 </x-dropdown-link>
 

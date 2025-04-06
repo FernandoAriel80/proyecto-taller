@@ -1,4 +1,4 @@
-<x-admin.admin-template title="Registrar Vehiculo">
+<x-admin.admin-template title="Registrar Vehiculo" sidebar="admin.components.sidebar">
     <div>
         <div class="flex justify-between">
             <section>

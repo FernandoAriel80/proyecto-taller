@@ -23,11 +23,12 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/reserva-reserve', [ReservationController::class, 'saveReserveData'])->name('reserve.save');
 
-    Route::get("/seguimiento-menu",function(){
-        return view("followUp.menu");
-    })->name("followUp.menu");
-    Route::get('/ver-seguimiento', [FollowUpController::class, 'index'])->name('followUp.index');
+    Route::get('/ver-seguimiento', [FollowUpController::class, 'index'])->name('followUp.reservation');
     Route::get('/seguimiento-detalles', [FollowUpController::class, 'details'])->name('followUp.details');
+
+    Route::get('/ver-detalle-general/{id}',[FollowUpController::class, 'show'])->name('followUp.details.general.data.show');
+    Route::get('/ver-reporte/{id}',[FollowUpController::class, 'report'])->name('followUp.details.report');
+    Route::get('/ver-notas/{id}',[FollowUpController::class, 'notes'])->name('followUp.details.notes');
 });
 
 require __DIR__.'/auth.php';

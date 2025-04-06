@@ -1,4 +1,4 @@
-<x-admin.workshop.assignedVehicle.workshop-template sub_title="Reporte del Empleado" :current_id="$id">
+<x-admin.workshop.assignedVehicle.workshop-template sidebar="admin.components.sidebar" menu_workshop="admin.workshop.assignedVehicle.components.menu-workshop" sub_title="Reporte del Empleado" :current_id="$id">
 
     <div class="grid gap-1">
         <section>

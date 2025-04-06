@@ -24,12 +24,16 @@
                                 {{ \Carbon\Carbon::parse($reservation->date)->format('d-m-Y') }}</td>
                             <td class="px-4 py-2">
                                 <div class="flex space-x-2">
-                                    <x-open-modal-button anyFunction="openUserModal">
+                                    <x-open-modal-button anyFunction="openUserModal" current_id="{{ $reservation->user->id }}">
                                         Ver Usuario
                                     </x-open-modal-button>
-                                    <x-open-modal-button anyFunction="openVehiclesModal">
+                                    <!-- Modal User -->
+                                    @include('admin.reservations.components.modal-user')
+                                    <x-open-modal-button anyFunction="openVehiclesModal" current_id="{{ $reservation->vehicle->id }}">
                                         Ver Vehículo
                                     </x-open-modal-button>
+                                    <!-- Modal Vehicle -->
+                                    @include('admin.reservations.components.modal-vehicle')
                                 </div>
                             </td>
                             @if ($reservation->is_confirmed == 0)

@@ -1,4 +1,4 @@
-<x-admin.admin-template title="Tareas Asignadas">
+<x-admin.admin-template title="Tareas Asignadas" sidebar="admin.components.sidebar">
     <div class=" grid grid-cols-1 gap-2 mx-4">
         @foreach ($assigned_vehicles as $assigned_vehicle)
             <div

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignedEmployee;
+use App\Models\EmployeeNote;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class FollowUpController extends Controller
 {
     /**
@@ -17,7 +21,14 @@ class FollowUpController extends Controller
     }
 
     public function details( Request $request ){
-        return view('followUp.details');
+        $details_vehicles = AssignedEmployee::with('vehicleInWorkshop')
+        ->whereHas('vehicleInWorkshop', function ($q) {
+            $q->where('phone_number', Auth::user()->phone_number );
+        })
+        ->orderByDesc('id')
+        ->get();
+
+    return view("followUp.details.index", compact('details_vehicles'));
     }
     /**
      * Show the form for creating a new resource.
@@ -40,7 +51,30 @@ class FollowUpController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $in_workshop = AssignedEmployee::with(['vehicleInWorkshop'])->orderByDesc('id')->findOrFail($id);
+            return view("followUp.details.inWorkshop.general-data",compact(['in_workshop']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function report(string $id){
+        try {
+            $response_report = AssignedEmployee::with(['employeeReport'])->findOrFail($id);
+            $report = $response_report->employeeReport->first();
+            return view('followUp.details.inWorkshop.report', compact(['report', 'id']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    public function notes(string $id){
+        try {
+            $notes = EmployeeNote::where('assigned_employee_id', '=', $id)->orderByDesc('id')->get();
+            return view('followUp.details.inWorkshop.note', compact(['id', 'notes']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

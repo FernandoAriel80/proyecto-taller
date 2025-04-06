@@ -1,4 +1,4 @@
-<x-admin.admin-template title="Reservas">
+<x-admin.admin-template title="Reservas" sidebar="admin.components.sidebar">
     <div>
         <section>
             <div class="flex justify-end">
@@ -9,11 +9,6 @@
                 </div>
             </div>
         </section>
-        <!-- Modal Vehicle -->
-        @include('admin.reservations.components.modal-vehicle')
-
-        <!-- Modal User -->
-        @include('admin.reservations.components.modal-user')
 
         <!-- Tabla de Reservas -->
         @include('admin.reservations.components.reservation-table')

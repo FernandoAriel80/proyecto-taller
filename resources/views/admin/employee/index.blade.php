@@ -1,4 +1,4 @@
-<x-admin.admin-template title="">
+<x-admin.admin-template title="" sidebar="admin.components.sidebar">
     <div class="py-5">
         @if (session('success'))
             <p class="text-green-400 mb-4">{{ session('success') }}</p>
