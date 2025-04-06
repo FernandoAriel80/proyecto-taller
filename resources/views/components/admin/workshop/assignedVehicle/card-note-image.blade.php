@@ -1,10 +1,10 @@
 @props(['src', 'alt', 'parag', 'id'])
 
-<div class="grid md:grid-cols-2 md:h-60 rounded-md bg-slate-500">
-    <div class=" rounded-s-md bg-slate-300 p-2">
+<div class="grid md:grid-cols-2 md:h-60 rounded-md bg-white">
+    <div class=" rounded-md bg-white border-2 border-slate-500 p-2">
         <p>{{ $parag }}</p>
     </div>
-    <div class="flex justify-center items-center rounded-l-md">
+    <div class="flex justify-center items-center rounded-l-md ">
         <!-- Clickable Image -->
         <img id="thumbnail" onclick="openModalImage({{ $id }})" class="h-60 max-w-auto cursor-pointer transition duration-300 "
             src="{{ asset('storage/' . $src) }}" alt="{{ $alt }}">

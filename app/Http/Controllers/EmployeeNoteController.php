@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\EmployeeNote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeNoteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index( string $id)
+    public function index(string $id)
     {
         try {
             $notes = EmployeeNote::where('assigned_employee_id', '=', $id)->orderByDesc('id')->get();
@@ -81,11 +82,11 @@ class EmployeeNoteController extends Controller
      */
     public function show(string $id)
     {
-       try {
-        //code...
-       } catch (\Throwable $th) {
-        //throw $th;
-       }
+        try {
+            dd($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -93,7 +94,12 @@ class EmployeeNoteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $employeeNote = EmployeeNote::findOrFail($id);
+            return view('admin.workshop.assignedVehicle.templates.update-note-form', compact(['employeeNote']));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -101,7 +107,38 @@ class EmployeeNoteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $request->validate([
+                'text_note' => 'required|string|max:500',
+                'image' => 'nullable|file|mimes:jpg,png,jpeg|max:2048'
+            ]);
+
+            $note = EmployeeNote::findOrFail($id);
+
+            $note->description = $request->text_note;
+
+            // If a new image is uploaded
+            if ($request->hasFile('image')) {
+                // Delete the old image from storage
+                if ($note->image_url && Storage::disk('public')->exists($note->image_url)) {
+                    Storage::disk('public')->delete($note->image_url);
+                }
+
+                // Store the new image
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $fileName = 'image_' . uniqid() . '.' . $extension;
+                $path = $request->file('image')->storeAs('images', $fileName, 'public');
+
+                $note->image_url = $path;
+            }
+
+            $note->save();
+
+            return redirect()->route('workshop.employee.note.index', ['id' => $note->assigned_employee_id])
+                ->with('success', 'Nota actualizada correctamente');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -3,21 +3,21 @@
         <x-open-modal-button anyFunction="openModalCreate"> Crea nota</x-open-modal-button>
     </div>
     <div>
-        @include('admin.workshop.assignedVehicle.components.modal-create-form')
+        @include('admin.workshop.assignedVehicle.components.modal-create-note-form')
     </div>
     <div class="grid gap-2">
         @if ($notes->count())
             @foreach ($notes as $note)
-                <div class="grid p-2 gap-1 rounded-md bg-slate-200 ">
+                <div class="grid p-2 gap-1 rounded-md bg-white ">
                     <x-admin.workshop.assignedVehicle.card-note-image parag="{{ $note->description }}"
                         src="{{ $note->image_url }}" alt="Imagen" :id="$note->id"/>
-                    <div class="w-full text-end bg-slate-800">
-                        <x-open-modal-button anyFunction="openModalUpdate" current_id="{{ $note->id }}"> Actualizar</x-open-modal-button>
+                    <div class="w-full text-end bg-white">
+                        <x-color-button><a href="{{ route('workshop.employee.note.edit',[$note->id]) }}">Actualizar</a></x-color-button>
                     </div>
                 </div>
             @endforeach
         @else
-            <div class="grid p-2 gap-2 rounded-md bg-slate-200 ">
+            <div class="grid p-2 gap-2 rounded-md bg-white ">
                 <p>No hay notas..</p>
             </div>
         @endif
@@ -31,12 +31,5 @@
     function closeModalCreate() {
         document.getElementById("modalCreate").classList.add("hidden");
     }
-    function openModalUpdate(id) {
-       // document.getElementById("modalUpdate").classList.remove("hidden");
-       alert(id)
-    }
 
-    function closeModalUpdate() {
-        document.getElementById("modalUpdate").classList.add("hidden");
-    }
 </script>

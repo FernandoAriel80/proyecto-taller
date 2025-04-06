@@ -36,7 +36,6 @@ class AssignedEmployeeController extends Controller
      */
     public function store(Request $request, string $id)
     {
-        dd($id);
         try {
             AssignedEmployee::create([
                 'user_id' => $request->user()->id,

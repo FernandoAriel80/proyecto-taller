@@ -1,11 +1,16 @@
-@props(['label'])
+@props(['label', 'image' => null])
 <div class="flex flex-col items-center gap-2">
     <label for="image" class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
         {{ $label }}
     </label>
     <input type="file" name="image" id="image" accept="image/*" class="hidden">
-    <img id="preview" class="mt-3 w-40 h-40 object-cover rounded-lg shadow-lg hidden" />
-    @error("image")
+    @if ($image != null)
+        <img id="preview" src={{ "/storage/{$image}" }}
+            class="mt-3 w-auto h-40 object-cover rounded-lg shadow-lg" />
+    @else
+        <img id="preview" class="mt-3 w-40 h-40 object-cover rounded-lg shadow-lg hidden" />
+    @endif
+    @error('image')
         <p class="text-red-400 text-sm">{{ $message }}</p>
     @enderror
 </div>
